@@ -1,0 +1,106 @@
+.container-detail-katalog {
+    width: 100%;
+}
+
+.container-detail-katalog .container-detail {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+}
+
+.container-detail-katalog .container-detail>div {
+    width: calc(100% / 2);
+}
+
+.container-detail-katalog .container-detail>div .title h2 {
+    text-transform: capitalize;
+    font-size: 40px;
+    line-height: 46px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container-detail-katalog .container-detail>div .deskripsi {
+    margin-top: 20px;
+    line-height: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 18;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container-detail-katalog .container-detail>div .stok h6,
+.container-detail-katalog .container-detail>div .harga h6 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.container-detail-katalog .container-detail>div .button {
+    display: flex;
+    gap: 20px;
+}
+
+.container-detail-katalog .container-detail>div button {
+    background-color: var(--buttonp-color);
+    margin-top: 20px;
+    padding: 8px 30px;
+    color: white;
+    border-radius: 8px;
+}
+
+.thumbnails {
+    display: flex;
+    margin: 1rem auto 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.thumbnail {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+.thumbnail {
+    opacity: 0.3;
+}
+
+.thumbnail.is-active {
+    opacity: 1;
+}
+
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    margin-top: 20px;
+    border: 1px solid black !important;
+}
+
+
+
+input.qtyplus {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+input.qtyminus {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

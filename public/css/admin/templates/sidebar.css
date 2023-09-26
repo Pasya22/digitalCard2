@@ -1,0 +1,107 @@
+#sidebarAdmin {
+    transition: all 2s ease-out;
+}
+
+.container-sidebar-admin {
+    width: 280px;
+    height: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    border-right: 1px solid black;
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.05);
+    position: relative;
+}
+
+.container-sidebar-admin .header {
+    width: 100%;
+    line-height: 80px;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.05);
+}
+
+.container-sidebar-admin .header img {
+    height: 60px;
+}
+
+.container-sidebar-admin .content {
+    width: 100%;
+    color: white;
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.05);
+}
+
+.container-sidebar-admin .content ul li.active {
+    background:
+        linear-gradient(to right,
+            var(--primary-color),
+            var(--primary-color)),
+        linear-gradient(to right,
+            gold,
+            goldenrod);
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    animation: led 3s ease-in infinite alternate;
+}
+
+.container-sidebar-admin .content ul li:hover {
+    background:
+        linear-gradient(to right,
+            var(--primary-color),
+            var(--primary-color)),
+        linear-gradient(to right,
+            gold,
+            goldenrod);
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    animation: led 2s ease-in infinite alternate;
+}
+
+.container-sidebar-admin .content ul a {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid black;
+    box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.05);
+}
+
+.container-sidebar-admin .footer-sidebar {
+    width: 100%;
+    padding: 10px 12px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+}
+
+.container-sidebar-admin .footer-sidebar .sosial-media-box ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container-sidebar-admin .footer-sidebar .sosial-media-box ul i {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.container-sidebar-admin .footer-sidebar .keterangan-box {
+    width: 100%;
+    text-align: center;
+}
+
+@keyframes led {
+    0% {
+        background-size: 100% 4px, 0 4px;
+    }
+
+    50% {
+        background-size: 0 4px, 100% 4px;
+    }
+
+    100% {
+        background-size: 100% 4px, 0 4px;
+    }
+}

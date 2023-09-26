@@ -1,0 +1,211 @@
+main {
+    width: 100%;
+}
+
+main .container-home {
+    width: 100%;
+    background-color: var(--light-color4);
+}
+
+main .container-home .container-carousel {
+    width: 100%;
+}
+
+main .container-home .container-carousel .banner img {
+    width: 100%;
+    height: 80vh;
+}
+
+.title-home h2 {
+    font-size: 34px !important;
+}
+
+.container-produk-category {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container-produk-category .header {
+    text-align: center;
+}
+
+.container-produk-category .header .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-produk-category .header .icon i {
+    font-size: 30px;
+    color: var(--buttonp-color);
+}
+
+.container-produk-category .header .icon span.border {
+    width: 100%;
+    max-width: 600px;
+    border-bottom: 2px solid var(--primary-color);
+    display: block;
+    align-self: center;
+    margin-top: -15px;
+    z-index: -2;
+}
+
+.container-produk-category .button-box {
+    width: 100%;
+    padding-top: 20px;
+}
+
+.container-produk-category .button-box ul {
+    display: flex;
+    gap: 20px;
+}
+
+.container-produk-category .button-box ul li button {
+    border-radius: 8px;
+    border: 1px solid var(--buttonp-color);
+    cursor: pointer;
+    padding: 8px 40px;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+    box-shadow: var(--small-shadow);
+}
+
+.container-produk-category .button-box ul li button.active {
+    background-color: var(--buttonp-color);
+    color: white;
+}
+
+.container-produk-category .button-box ul li button:hover {
+    box-shadow: inset 300px 0 0 0 var(--buttonp-color);
+    color: white;
+}
+
+.container-produk-category .content-box {
+    padding-top: 20px;
+}
+
+.container-produk-category .content-box .contentCategory {
+    width: 100%;
+    display: none;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-produk-category .content-box .contentCategory>div {
+    width: calc(100% / 4 - 20px);
+    box-shadow: var(--card-shadow);
+}
+
+.container-produk-category .content-box .contentCategory>div:hover {
+    box-shadow: var(--container-shadow);
+}
+
+.container-produk-category .content-box .contentCategory img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.container-produk-category .content-box .contentCategory:hover {
+    box-shadow: inset 400px 0 0 0 rgba(0, 0, 0, black);
+}
+
+.container-produk-category .content-box .contentCategory figure img {
+    width: 100%;
+    height: 100%;
+}
+
+.container-produk-category .content-box .contentCategory .deskripsi {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--light-color1);
+}
+
+.container-produk-category .content-box .contentCategory .deskripsi h5 {
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.container-penjelasan-produk {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container-penjelasan-produk .header {
+    text-align: center;
+}
+
+.container-penjelasan-produk .header .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-penjelasan-produk .header .icon i {
+    font-size: 30px;
+    color: var(--buttonp-color);
+}
+
+.container-penjelasan-produk .header .icon span.border {
+    width: 100%;
+    max-width: 600px;
+    border-bottom: 2px solid var(--primary-color);
+    display: block;
+    align-self: center;
+    margin-top: -15px;
+    z-index: -2;
+}
+
+.container-penjelasan-produk .content {
+    display: flex;
+    padding-top: 40px;
+}
+
+
+.container-penjelasan-produk .content>div {
+    width: calc(100% / 2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.container-penjelasan-produk .content>div.content-box {
+    padding: 0 20px;
+}
+
+.container-penjelasan-produk .content>div img {
+    width: 100%;
+    height: 100%;
+}
+
+.container-penjelasan-produk .content>div .title h2 {
+    text-transform: capitalize;
+    font-size: 30px;
+    line-height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container-penjelasan-produk .content>div .deskripsi {
+    margin-top: 20px;
+    line-height: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 18;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container-penjelasan-produk .content>div .button {
+    color: var(--buttonp-color);
+    margin-top: 20px;
+}
