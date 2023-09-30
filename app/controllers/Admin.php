@@ -4,7 +4,11 @@ class Admin extends Controller
 {
     public function index()
     {
+
         $data['judul'] = 'Dashboard';
+        $data['users'] = count($this->model('admin_model')->getALLUser());
+        $data['trx'] = count($this->model('admin_model')->getALLTransaksi());
+        $data['katalog'] = count($this->model('admin_model')->getALLKatalog());
         $this->view('admin/templates/header', $data);
         $this->view('admin/dashboard/index', $data);
         $this->view('admin/templates/footer');
@@ -36,16 +40,17 @@ class Admin extends Controller
         $data['judul'] = 'Data Transaksi';
         $data['trx'] = $this->model('admin_model')->getALLTransaksiJoin();
         $data['katalog'] = $this->model('admin_model')->getALLKatalog();
-         
+
         // echo json_encode($data);
         $this->view('admin/templates/header', $data);
         $this->view('admin/Data/DataTransaksi', $data);
         $this->view('admin/templates/footer');
     }
+   
     public function filterByCategory()
     {
         $filter_by = $_POST['filter'];
-        $search_keyword = $_POST['search_keyword'];
+        $search_keyword = $_POST['search_keyword']; 
 
         if ($filter_by == 'kode_trx') {
             $data['trx'] = $this->model('admin_model')->getTransaksiByKodeTrx($search_keyword);

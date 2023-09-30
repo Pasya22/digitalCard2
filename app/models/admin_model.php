@@ -24,6 +24,11 @@ class admin_model extends Controller
         $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_user DESC');
         return $this->db->resultSet();
     }
+    // public function getTotalUser()
+    // {
+    //     $this->db->query('SELECT COUNT(*) FROM ' . $this->table . ' WHERE id_user = :id_user');
+    //     return $this->db->resultSet();
+    // }
 
     public function getALLUserById($id)
     {
@@ -349,7 +354,7 @@ class admin_model extends Controller
         $this->db->bind('username', $username);
         return $this->db->resultSet();
     }
-
+    
     // Add Data Trasaksi=========================--------------------------///
     public function tambahDataTrx($data)
     {

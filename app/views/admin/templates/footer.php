@@ -1,8 +1,8 @@
 <footer>
 
 </footer>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/09e00d7278.js" crossorigin="anonymous"></script>
 <script src="<?= BASEURL; ?>js/script.js"></script>
 <script>
@@ -21,43 +21,152 @@
     //     });
     // });
 
+
+
+
     //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - filter data transaksi-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // 
-    document.getElementById('search_keyword').addEventListener('input', function() {
-        var filterValue = this.value.toLowerCase();
-        var filterBy = document.getElementById('filter').value;
-        var rows = document.querySelectorAll('#myTable tbody tr');
+    document.addEventListener('DOMContentLoaded', function() {
+        const statusFilter = document.getElementById('statusFilter');
+        const customerSearch = document.getElementById('customerSearch');
+        const amountSearch = document.getElementById('amountSearch');
+        const ascCheckbox = document.getElementById('ascCheckbox');
 
-        rows.forEach(function(row) {
-            var data = row.querySelector('td:nth-child(' + (filterBy === ' ' ? 0 : filterBy === 'username' ? 2 : filterBy === 'kode_trx' ? 3 : filterBy === 'nama_katalog' ? 4 : filterBy === 'metode_trx' ? 5 : filterBy === 'jumlah' ? 6 : 7) + ')').textContent.toLowerCase();
-            if (filterValue.length > 0) {
-                if (filterBy === 'semua') {
-                    var matchFound = false;
-                    row.querySelectorAll('td').forEach(function(cell) {
-                        if (cell.textContent.toLowerCase().includes(filterValue)) {
-                            matchFound = true;
-                        }
-                    });
-                    if (matchFound) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+        const tableRows = document.querySelectorAll('#myTable tbody tr');
+
+        function filterTable() {
+            const selectedStatus = statusFilter.value.toLowerCase();
+            const customerQuery = customerSearch.value.toLowerCase();
+            const amountQuery = amountSearch.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                const status = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
+                const customer = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const amount = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+
+                const statusMatch = selectedStatus === 'all' || status === selectedStatus;
+                const customerMatch = customer.includes(customerQuery);
+                const amountMatch = amount.includes(amountQuery);
+
+                if (statusMatch && customerMatch && amountMatch) {
+                    row.style.display = '';
                 } else {
-                    if (data.startsWith(filterValue)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = 'none';
                 }
-            } else {
-                row.style.display = '';
-            }
-        });
+            });
+        }
+
+        function sortTable(ascending) {
+            const rows = Array.from(tableRows);
+
+            rows.sort((a, b) => {
+                const aValue = parseInt(a.querySelector('td:nth-child(6)').textContent);
+                const bValue = parseInt(b.querySelector('td:nth-child(6)').textContent);
+
+                if (ascending) {
+                    return aValue - bValue;
+                } else {
+                    return bValue - aValue;
+                }
+            });
+
+            const tbody = document.querySelector('#myTable tbody');
+
+            rows.forEach(row => {
+                tbody.appendChild(row);
+            });
+        }
+
+        statusFilter.addEventListener('change', filterTable);
+        customerSearch.addEventListener('input', filterTable);
+        amountSearch.addEventListener('input', filterTable);
+        ascCheckbox.addEventListener('change', () => sortTable(ascCheckbox.checked));
     });
 
-    document.getElementById('searchForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Mencegah pengiriman formulir
-    });
+
+    // function applyFilters() {
+    //     var inputCustomer = document.getElementById("filterCustomer").value.toUpperCase();
+    //     var inputCodeTRX = document.getElementById("filterCodeTRX").value.toUpperCase();
+    //     var inputCatalog = document.getElementById("filterCatalog").value.toUpperCase();
+    //     var inputQuantity = document.getElementById("filterQuantity").value.toUpperCase();
+    //     var inputStatus = document.getElementById("filterStatus").value.toUpperCase();
+
+    //     var table = document.getElementById("myTable");
+    //     var tr = table.getElementsByTagName("tr");
+
+    //     for (var i = 0; i < tr.length; i++) {
+    //         var tdCustomer = tr[i].getElementsByTagName("td")[1];
+    //         var tdCodeTRX = tr[i].getElementsByTagName("td")[2];
+    //         var tdCatalog = tr[i].getElementsByTagName("td")[3];
+    //         var tdQuantity = tr[i].getElementsByTagName("td")[5];
+    //         var tdStatus = tr[i].getElementsByTagName("td")[6];
+
+    //         if (tdCustomer && tdCodeTRX && tdCatalog && tdQuantity && tdStatus) {
+    //             var txtValueCustomer = tdCustomer.textContent || tdCustomer.innerText;
+    //             var txtValueCodeTRX = tdCodeTRX.textContent || tdCodeTRX.innerText;
+    //             var txtValueCatalog = tdCatalog.textContent || tdCatalog.innerText;
+    //             var txtValueQuantity = tdQuantity.textContent || tdQuantity.innerText;
+    //             var txtValueStatus = tdStatus.textContent || tdStatus.innerText;
+
+    //             var customerFilter = txtValueCustomer.toUpperCase().indexOf(inputCustomer) > -1;
+    //             var codeTRXFilter = txtValueCodeTRX.toUpperCase().indexOf(inputCodeTRX) > -1;
+    //             var catalogFilter = txtValueCatalog.toUpperCase().indexOf(inputCatalog) > -1;
+    //             var quantityFilter = txtValueQuantity.toUpperCase().indexOf(inputQuantity) > -1;
+    //             var statusFilter = txtValueStatus.toUpperCase().indexOf(inputStatus) > -1;
+
+    //             if (customerFilter && codeTRXFilter && catalogFilter && quantityFilter && statusFilter) {
+    //                 tr[i].style.display = "";
+    //             } else {
+    //                 tr[i].style.display = "none";
+    //             }
+    //         }
+    //     }
+    // }
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     window.originalTableHTML = document.getElementById('myTable').innerHTML;
+    // });
+
+    // document.getElementById('search_keyword').addEventListener('input', function() {
+    //     var filterValue = this.value.toLowerCase();
+    //     var filterBy = document.getElementById('filter').value;
+    //     var rows = document.querySelectorAll('#myTable tbody tr');
+    //     var noResultsMessage = document.getElementById('noResultsMessage');
+    //     var matchFound = false;
+    //     rows.forEach(function(row) {
+    //         var cells = row.querySelectorAll('td');
+    //         var matchFoundInRow = false;
+
+    //         cells.forEach(function(cell, index) {
+    //             var data = cell.textContent.toLowerCase();
+
+    //             if (filterValue.length > 0) {
+    //                 if (data.includes(filterValue)) {
+    //                     matchFoundInRow = true;
+    //                     matchFound = true;
+    //                     row.style.display = '';
+    //                 }
+    //             } else {
+    //                 matchFoundInRow = true;
+    //             }
+
+    //             if (!matchFoundInRow && index === cells.length - 1) {
+    //                 row.style.display = 'none';
+    //             }
+    //         });
+    //     });
+
+    //     if (noResultsMessage) {
+    //         if (!matchFound) {
+    //             noResultsMessage.style.display = 'block';
+    //         } else {
+    //             noResultsMessage.style.display = 'none';
+    //         }
+    //     }
+    // });
+
+    // document.getElementById('searchForm').addEventListener('submit', function(event) {
+    //     event.preventDefault(); // Mencegah pengiriman formulir
+    // });
 </script>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>

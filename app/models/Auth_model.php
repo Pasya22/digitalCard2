@@ -89,14 +89,14 @@ class Auth_model extends Controller
             return $_SESSION['user_session']['username'];
         }
         return null;
-    }
+    } 
 
     public function login($login)
     {
         // $dataP = password_verify($password);
         $username = $login['username'];
         // Ambil data dari database
-        $query = "SELECT * FROM login WHERE username = :username || email = :email";
+        $query = "SELECT * FROM login WHERE (username = :username OR email = :email) AND is_active = 1";
         $this->db->query($query);
         $this->db->bind('username', "$username");
         $this->db->bind('email', "$username");
@@ -104,7 +104,7 @@ class Auth_model extends Controller
         if ($this->db->rowCount() > 0) {
             // jika password yang dimasukkan sesuai dengan yg ada di database
             if (password_verify($login['password'], $data['password'])) {
-                $_SESSION['user_session'] = $data;
+                $_SESSION['user_session'] = $data; 
                 return true;
             } else {
                 return false;

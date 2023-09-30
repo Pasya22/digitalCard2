@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="<?= BASEURL ?>css/admin/templates/navbar.css">
     <link rel="stylesheet" href="<?= BASEURL ?>css/admin/templates/breadcrumb.css">
     <link rel="stylesheet" href="<?= BASEURL ?>css/style.css">
-
-
+    <!-- <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script> -->
 
     <style>
         #container {

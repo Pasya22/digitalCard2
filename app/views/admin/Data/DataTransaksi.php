@@ -31,26 +31,27 @@ if (!$_SESSION["user_session"]) {
                     </div>
                     <div class="container-form">
 
-                        <!-- <label for="nama_katalog">Cari Filter:</label>
-                        <input name="nama_katalog" id="nama_katalog" type="text" placeholder="Masukan Nama Katalog"> -->
-                        <form id="searchForm">
-                            <div class="Category">
-                                <label for="filter">Filter Transaksi</label>
-                                <span>:</span>
-                                <select name="filter" id="filter" style=" width:18%;">
-                                    <option value=" " style="text-align: center;">-- Silahkan Pilih Filter --</option>
-                                    <option value="semua">Berdasarkan ALL</option>
-                                    <option value="kode_trx">Berdasarkan Kode TRX</option>
-                                    <option value="nama_katalog">Berdasarkan Nama Katalog</option>
-                                    <option value="username">Berdasarkan Nama Customer</option>
-                                    <option value="metode_trx">Berdasarkan metode</option>
-                                    <option value="jumlah">Berdasarkan jumlah</option>
-                                    <option value="status_trx">Berdasarkan status</option>
-                                </select>
-                                <input name="search_keyword" id="search_keyword" type="text" placeholder=" Setelah Memilih Filter, Silahkan Masukkan Kata Kunci Filter">
-                            </div>
-                            <!-- <button type="submit">Filter</button> -->
-                        </form>
+                        <label>Status:
+                            <select id="statusFilter">
+                                <option value="all">All</option>
+                                <option value="pending">Pending</option>
+                                <option value="successful">Successful</option>
+                                <option value="failed">Failed</option>
+                                <option value="refund">Refund</option>
+                            </select>
+                        </label>
+
+                        <label>Cari Customer:
+                            <input type="text" id="customerSearch">
+                        </label>
+
+                        <label>Cari Jumlah:
+                            <input type="text" id="amountSearch">
+                        </label>
+
+                        <label>
+                            <input type="checkbox" id="ascCheckbox"> Ascending/Descending 
+                        </label>
                     </div>
 
                     <table id="myTable">
@@ -66,6 +67,7 @@ if (!$_SESSION["user_session"]) {
                                 <th>Action</th>
                             </tr>
                         </thead>
+
                         <?php
                         $i = 1;
                         foreach ($data['trx'] as $item) {
@@ -94,6 +96,7 @@ if (!$_SESSION["user_session"]) {
                                     echo '<td>REFUND</td>';
                                 }
                                 ?>
+
                                 <td>
                                     <a class="ubah" href="<?= BASEURL . 'Admin/formEditTrx/' . $item['trx_id'] ?>">Edit</a>
                                     <a class="hapus" href="<?= BASEURL . 'Admin/deleteTrx/' . $item['trx_id'] ?>">Delete</a>

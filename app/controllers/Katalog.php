@@ -36,7 +36,6 @@ class Katalog extends Controller
 
     public function addTransaksiUser()
     {
-        session_start(); // Mulai sesi
 
         // Periksa apakah pengguna sudah login
         if (!isset($_SESSION["user_session"]) || empty($_SESSION["user_session"])) {
@@ -45,10 +44,23 @@ class Katalog extends Controller
             exit();
         }
 
+        $Duser =  $_SESSION['user_session']['username'];
+
+        $nama_katalog = $_POST['nama_katalog'];
+        $kode_trx = $_POST['kode_trx'];
+        $harga =  $_POST['harga'];
+        $jumlah =  $_POST['jumlah'];
+
+        // Menghitung total harga
+        $total_harga = $harga * $jumlah;
+        $totalNya =  $_POST[$total_harga];
         if ($this->model('admin_model')->tambahDataTrx($_POST) > 0) {
             Flasher::setFlash('', 'Add Data User', 'Berhasil ', 'success');
-            header('Location: ' . BASEURL . 'Katalog/index');
-            exit;
+
+
+            // Bangun URL untuk pesan WhatsApp
+            $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" . $Duser . "%0AKode%20Trx%20%3A" .  $kode_trx . "%0Anama%20katalog%20%3A" .  $nama_katalog . "%0AHarga%20Katalog%20%3A" . $harga . "%0AJumlah%20Trx%20%3A" . $jumlah . "%3A%0ATotal%20Harga%3A%20" . $totalNya;
+            header("Location: $whatsapp_url");
         } else {
             Flasher::setFlash('Add Data User', 'Gagal ', 'danger');
             header('Location: ' . BASEURL . 'Katalog/Detail');

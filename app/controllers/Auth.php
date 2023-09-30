@@ -52,8 +52,6 @@ class Auth extends Controller
     {
         $result = $this->model('Auth_model')->login($_POST);
         if ($result) {
-            $role_id = $result['role_id'];
-
             // var_dump($_SESSION['user_session']['role_id']);
             // die;
             if ($_SESSION['user_session']['role_id'] == 1) {
@@ -71,7 +69,7 @@ class Auth extends Controller
                 exit;
             }
         } else {
-            Flasher::setFlash('Username / Password Salah', 'Login', 'Gagal', 'danger');
+            Flasher::setFlash('Username / Password Salah atau Akun Tidak Aktif', 'Gagal', 'danger');
             header('Location: ' . BASEURL . 'auth/login');
             exit;
         }

@@ -1,5 +1,5 @@
 <?php
- 
+
 $this->view('templates/navbar', $data);
 ?>
 <main>
@@ -41,20 +41,24 @@ $this->view('templates/navbar', $data);
             </div>
             <div class="secondary-box content-box">
 
-                <form action="<?= BASEURL ?>Katalog/addTransaksiUser" method="post" >
+                <form action="<?= BASEURL ?>Katalog/addTransaksiUser" method="post">
                     <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
                     <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                     <input type="hidden" name="metode_trx" value="BCA">
+                    <!-- yang metode di ganti dulu paket ya -->
                     <input type="hidden" name="kode_trx" value="2345453">
                     <input type="hidden" name="status_trx" value="Pending">
+
                     <div class="title">
                         <h2><?= $data['katalog']['nama_katalog'] ?></h2>
+                        <input type="hidden" name="nama_katalog" value="<?= $data['katalog']['nama_katalog'] ?>">
                     </div>
                     <div class="deskripsi">
                         <p> <?= $data['katalog']['deskripsi_katalog']; ?> </p>
                     </div>
                     <div class="harga">
-                        <h6>Harga : Rp. <?= number_format($data['katalog']['harga']) ?></h6>
+                        <h6>Harga : <?= $data['katalog']['harga'] ?></h6>
+                        <input type="hidden" name="harga" value="<?= $data['katalog']['harga'] ?>">
                     </div>
                     <div class="stok">
                         <h6>Stok : <?= $data['katalog']['stock'] ?></h6>

@@ -14,6 +14,7 @@ if (!$_SESSION["user_session"]) {
             $this->view('admin/templates/navbar', $data);
             ?>
         </header>
+  
         <main>
             <div class="container-dashboard">
                 <ul>
@@ -26,7 +27,7 @@ if (!$_SESSION["user_session"]) {
                                 <i class="fa-solid fa-user"></i>
                             </div>
                             <div class="jumlah">
-                                <p>JUMLAH : 12</p>
+                                <p>JUMLAH : <?= $data['users'] ?></p>
                             </div>
                         </div>
                     </li>
@@ -39,7 +40,7 @@ if (!$_SESSION["user_session"]) {
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
                             <div class="jumlah">
-                                <p>JUMLAH : 12</p>
+                                <p>JUMLAH :  <?= $data['katalog'] ?></p>
                             </div>
                         </div>
                     </li>
@@ -52,7 +53,7 @@ if (!$_SESSION["user_session"]) {
                                 <i class="fa-solid fa-landmark"></i>
                             </div>
                             <div class="jumlah">
-                                <p>JUMLAH : 12</p>
+                                <p>JUMLAH :  <?= $data['trx'] ?></p>
                             </div>
                         </div>
                     </li>
