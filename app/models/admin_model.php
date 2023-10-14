@@ -24,11 +24,7 @@ class admin_model extends Controller
         $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_user DESC');
         return $this->db->resultSet();
     }
-    // public function getTotalUser()
-    // {
-    //     $this->db->query('SELECT COUNT(*) FROM ' . $this->table . ' WHERE id_user = :id_user');
-    //     return $this->db->resultSet();
-    // }
+   
 
     public function getALLUserById($id)
     {
@@ -295,7 +291,7 @@ class admin_model extends Controller
         return $this->db->rowCount();
     }
 
-    // DATA TRANSAKSI    //--------------------------------------------------------------------
+    // DATA TRANSAKSI    //-------------------------------------------------------------------- --------------------------- //
 
     // Get Data Transaksi
     public function getALLTransaksi()
@@ -330,7 +326,7 @@ class admin_model extends Controller
                      JOIN catalog ON transaksi.katalog_id = catalog.katalog_id
                      ORDER BY transaksi.trx_id DESC');
 
-       return $this->db->resultSet();
+        return $this->db->resultSet();
     }
 
     public function getALLTransaksiJoinById($id)
@@ -381,9 +377,10 @@ class admin_model extends Controller
         $this->db->bind('username', $username);
         return $this->db->resultSet();
     }
+    //  end get data transaksi -------------------------------------------------------------===================================//
 
-    // Add Data Trasaksi=========================--------------------------///
-    public function tambahDataTrx($data)
+    // Add Data Trasaksi =========================--------------------------///
+    public function tambahDataTrx($data) //add data transaksi user a choices bought by catalog 
     {
         // Calculate the total price
         $katalog = $this->model('admin_model')->getALLKatalogById($data['katalog_id']); // Assuming you have a method to retrieve katalog by ID
@@ -410,7 +407,7 @@ class admin_model extends Controller
     }
 
 
-    public function tambahDataTrxPaket($data)
+    public function tambahDataTrxPaket($data) //add data transaksi user a choices bought by paket 
     {
         $query = "INSERT INTO transaksi (kode_trx, id_user, katalog_id, kategori_id, paket_id, total, jumlah, status_trx)
                   VALUES (:kode_trx, :id_user, :katalog_id, :kategori_id, :paket_id, :total, :jumlah, :status_trx)";
@@ -431,7 +428,7 @@ class admin_model extends Controller
 
         return $this->db->rowCount();
     }
-    function generateRandomCode($length = 8)
+    function generateRandomCode($length = 8) // using function generateRandomCode for take code shuffle transaction 
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $code = '';
@@ -440,13 +437,7 @@ class admin_model extends Controller
         }
         return $code;
     }
-
-
-    // Gunakan fungsi generateRandomCode untuk mendapatkan kode transaksi acak
-
-
-
-    // END Add Data Trasaksi=========================--------------------------///
+    //  end Add Data Trasaksi =========================--------------------------/// 
 
 
     // Edit Data Trasaksi=========================--------------------------///
@@ -480,7 +471,6 @@ class admin_model extends Controller
     }
 
 
-
     // END Edit Data Trasaksi=========================--------------------------///
 
     // Delete Data Trasaksi=========================--------------------------///
@@ -494,7 +484,7 @@ class admin_model extends Controller
     }
     // END Delete Data Trasaksi=========================--------------------------///
 
-    // END TRANSAKSI    //--------------------------------------------------------------------
+    // END TRANSAKSI    //-------------------------------------------------------------------- //
 
 
 
@@ -643,7 +633,7 @@ class admin_model extends Controller
     // end data katalog==============--------------------------------------------------///
 
 
-    // DATA TRANSAKSI===================---------------------------
+    // DATA upload ===================---------------------------
 
     public function upload()
     {

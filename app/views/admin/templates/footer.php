@@ -6,24 +6,6 @@
 <script src="https://kit.fontawesome.com/09e00d7278.js" crossorigin="anonymous"></script>
 <script src="<?= BASEURL; ?>js/script.js"></script>
 <script>
-    // filter data 
-    // document.getElementById('nama_katalog').addEventListener('input', function() {
-    //     var filterValue = this.value;
-    //     var rows = document.querySelectorAll('#myTable tbody tr');
-
-    //     rows.forEach(function(row) {
-    //         var namaKatalog = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-    //         if (namaKatalog.includes(filterValue.toLowerCase())) {
-    //             row.style.display = '';
-    //         } else {
-    //             row.style.display = 'none';
-    //         }
-    //     });
-    // });
-
-
-
-
     //-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - filter data transaksi-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // 
     document.addEventListener('DOMContentLoaded', function() {
         const statusFilter = document.getElementById('statusFilter');
@@ -82,95 +64,135 @@
         amountSearch.addEventListener('input', filterTable);
         ascCheckbox.addEventListener('change', () => sortTable(ascCheckbox.checked));
     });
+</script>
+<script>
+    // sort user ===================================================== -------------------------- //
 
-    
+    document.addEventListener('DOMContentLoaded', function() {
+        var ascButton = document.getElementById('ascOption');
+        var descButton = document.getElementById('descOption');
+        // var table = document.getElementById('myUser').getElementsByTagName('tbody')[0];
+        // var rows = table.getElementsByTagName('tr');
+        // var ascending = true;
 
-    // function applyFilters() {
-    //     var inputCustomer = document.getElementById("filterCustomer").value.toUpperCase();
-    //     var inputCodeTRX = document.getElementById("filterCodeTRX").value.toUpperCase();
-    //     var inputCatalog = document.getElementById("filterCatalog").value.toUpperCase();
-    //     var inputQuantity = document.getElementById("filterQuantity").value.toUpperCase();
-    //     var inputStatus = document.getElementById("filterStatus").value.toUpperCase();
+        ascOption.addEventListener('click', function() {
+            sortTable('asc');
+        });
 
-    //     var table = document.getElementById("myTable");
-    //     var tr = table.getElementsByTagName("tr");
+        descOption.addEventListener('click', function() {
+            sortTable('desc');
+        });
 
-    //     for (var i = 0; i < tr.length; i++) {
-    //         var tdCustomer = tr[i].getElementsByTagName("td")[1];
-    //         var tdCodeTRX = tr[i].getElementsByTagName("td")[2];
-    //         var tdCatalog = tr[i].getElementsByTagName("td")[3];
-    //         var tdQuantity = tr[i].getElementsByTagName("td")[5];
-    //         var tdStatus = tr[i].getElementsByTagName("td")[6];
+        function sortTable(sortDirection) {
+            var table = document.getElementById('myUser').getElementsByTagName('tbody')[0];
+            var rows = table.getElementsByTagName('tr');
+            var arr = Array.from(rows);
 
-    //         if (tdCustomer && tdCodeTRX && tdCatalog && tdQuantity && tdStatus) {
-    //             var txtValueCustomer = tdCustomer.textContent || tdCustomer.innerText;
-    //             var txtValueCodeTRX = tdCodeTRX.textContent || tdCodeTRX.innerText;
-    //             var txtValueCatalog = tdCatalog.textContent || tdCatalog.innerText;
-    //             var txtValueQuantity = tdQuantity.textContent || tdQuantity.innerText;
-    //             var txtValueStatus = tdStatus.textContent || tdStatus.innerText;
+            arr.sort(function(row1, row2) {
+                var cell1 = row1.cells[0].textContent.trim();
+                var cell2 = row2.cells[0].textContent.trim();
 
-    //             var customerFilter = txtValueCustomer.toUpperCase().indexOf(inputCustomer) > -1;
-    //             var codeTRXFilter = txtValueCodeTRX.toUpperCase().indexOf(inputCodeTRX) > -1;
-    //             var catalogFilter = txtValueCatalog.toUpperCase().indexOf(inputCatalog) > -1;
-    //             var quantityFilter = txtValueQuantity.toUpperCase().indexOf(inputQuantity) > -1;
-    //             var statusFilter = txtValueStatus.toUpperCase().indexOf(inputStatus) > -1;
+                if (sortDirection === 'asc') {
+                    return cell1 - cell2;
+                } else if (sortDirection === 'desc') {
+                    return cell2 - cell1;
+                }
+            });
 
-    //             if (customerFilter && codeTRXFilter && catalogFilter && quantityFilter && statusFilter) {
-    //                 tr[i].style.display = "";
-    //             } else {
-    //                 tr[i].style.display = "none";
-    //             }
-    //         }
-    //     }
-    // }
+            for (var i = 0; i < arr.length; i++) {
+                table.appendChild(arr[i]);
+            }
+        }
+    });
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     window.originalTableHTML = document.getElementById('myTable').innerHTML;
-    // });
+    document.addEventListener('DOMContentLoaded', function() {
+        var roleFilter = document.getElementById('roleFilter');
+        var activasiFilter = document.getElementById('activasiFilter');
+        var userSearch = document.getElementById('userSearch');
+        // var sscCheckbox = document.getElementById('sscCheckbox'); // Sesuaikan dengan nama yang benar
+        var table = document.getElementById('myUser');
 
-    // document.getElementById('search_keyword').addEventListener('input', function() {
-    //     var filterValue = this.value.toLowerCase();
-    //     var filterBy = document.getElementById('filter').value;
-    //     var rows = document.querySelectorAll('#myTable tbody tr');
-    //     var noResultsMessage = document.getElementById('noResultsMessage');
-    //     var matchFound = false;
-    //     rows.forEach(function(row) {
-    //         var cells = row.querySelectorAll('td');
-    //         var matchFoundInRow = false;
+        function applyFilters() {
+            var roleValue = roleFilter.value;
+            var activasiValue = activasiFilter.value;
+            var searchTerm = userSearch.value.toLowerCase();
+            // var isAscending = sscCheckbox.checked;
 
-    //         cells.forEach(function(cell, index) {
-    //             var data = cell.textContent.toLowerCase();
+            var rows = table.querySelectorAll('tbody tr');
 
-    //             if (filterValue.length > 0) {
-    //                 if (data.includes(filterValue)) {
-    //                     matchFoundInRow = true;
-    //                     matchFound = true;
-    //                     row.style.display = '';
-    //                 }
-    //             } else {
-    //                 matchFoundInRow = true;
-    //             }
+            rows.forEach(function(row) {
+                var email = row.cells[1].textContent.toLowerCase();
+                var username = row.cells[2].textContent.toLowerCase();
+                var role = row.cells[3].textContent.toLowerCase();
+                var activasi = row.cells[4].textContent.toLowerCase();
 
-    //             if (!matchFoundInRow && index === cells.length - 1) {
-    //                 row.style.display = 'none';
-    //             }
-    //         });
-    //     });
+                var showRow = true;
 
-    //     if (noResultsMessage) {
-    //         if (!matchFound) {
-    //             noResultsMessage.style.display = 'block';
-    //         } else {
-    //             noResultsMessage.style.display = 'none';
-    //         }
-    //     }
-    // });
+                if (roleValue !== 'all' && role !== roleValue) {
+                    showRow = false;
+                }
 
-    // document.getElementById('searchForm').addEventListener('submit', function(event) {
-    //     event.preventDefault(); // Mencegah pengiriman formulir
-    // });
+                if (activasiValue !== 'all' && activasi !== activasiValue) {
+                    showRow = false;
+                }
+
+                if (searchTerm !== '' && (email.indexOf(searchTerm) === -1 && username.indexOf(searchTerm) === -1)) {
+                    showRow = false;
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        roleFilter.addEventListener('change', applyFilters);
+        activasiFilter.addEventListener('change', applyFilters);
+        userSearch.addEventListener('input', applyFilters);
+        // sscCheckbox.addEventListener('change', applyFilters); // Perbaikan di sini
+    });
+    // sort user ===================================================== -------------------------- //
 </script>
 
+
+<!----------------------------------------------------- dropdown transaksi ------------------------------------------------->
+<script>
+    // Dapatkan elemen dropdown dan ikon
+    const dropdown = document.getElementById('statusFilter');
+    const icon = document.querySelector('.icon-dropdown');
+
+    // Tambahkan event listener untuk mengubah ikon ketika dropdown dipilih
+    dropdown.addEventListener('change', function() {
+        icon.classList.add('active');
+        icon.style.transform = 'rotate(90deg)';
+    });
+
+    // Tambahkan event listener untuk mengubah ikon ketika dropdown di-hover
+    dropdown.addEventListener('mouseover', function() {
+        if (!icon.classList.contains('active')) {
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // Kembalikan ikon ke posisi normal saat mouse meninggalkan dropdown
+    dropdown.addEventListener('mouseout', function() {
+        if (!icon.classList.contains('active')) {
+            icon.style.transform = 'rotate(180deg)';
+        }
+    });
+
+    // Tambahkan event listener untuk membatalkan perubahan ikon saat ikon di-klik kembali
+    icon.addEventListener('click', function(event) {
+        event.stopPropagation(); // Menghentikan event klik dari memicu event listener dokumen
+        icon.classList.remove('active');
+        icon.style.transform = 'rotate(0deg)';
+    });
+
+    // Tambahkan event listener ke elemen dokumen untuk menanggapi klik di luar dropdown atau ikon
+    document.addEventListener('click', function() {
+        icon.classList.remove('active');
+        icon.style.transform = 'rotate(0deg)';
+    });
+</script>
+<!----------------------------------------------------- dropdown transaksi ------------------------------------------------->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>
 
 <script>

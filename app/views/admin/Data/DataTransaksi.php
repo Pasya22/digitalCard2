@@ -31,26 +31,30 @@ if (!$_SESSION["user_session"]) {
                     </div>
                     <div class="container-form">
 
+                     
+
                         <label>Status:
-                            <select id="statusFilter">
+                            <select id="statusFilter" class="neon">
                                 <option value="all">All</option>
                                 <option value="pending">Pending</option>
                                 <option value="successful">Successful</option>
                                 <option value="failed">Failed</option>
                                 <option value="refund">Refund</option>
                             </select>
+                            <i class="icon-dropdown"></i>
                         </label>
 
+
                         <label>Cari Customer:
-                            <input type="text" id="customerSearch">
+                            <input type="text" id="customerSearch" class="neon">
                         </label>
 
                         <label>Cari Jumlah:
-                            <input type="text" id="amountSearch">
+                            <input type="text" id="amountSearch" class="neon">
                         </label>
 
                         <label>
-                            <input type="checkbox" id="ascCheckbox"> Ascending/Descending
+                            <input type="checkbox" id="ascCheckbox" class="neon"> Ascending/Descending
                         </label>
                     </div>
 
@@ -75,11 +79,12 @@ if (!$_SESSION["user_session"]) {
                         foreach ($data['trx'] as $item) {
                             if ($item['paket_id'] != 0) {
                                 $item['nama_katalog'] = "none";
-                            } 
+                            }
                             if ($item['paket_id'] == 0) {
                                 $item['nama_paket'] = "none";
-                            } 
+                            }
                         ?>
+
                             <tr class="table-active">
                                 <td><?= $i++; ?></td>
                                 <td><?= $item['username'] ?></td>

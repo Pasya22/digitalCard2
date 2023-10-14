@@ -202,7 +202,7 @@ class Admin extends Controller
     }
 
 
-    //  =========================== --------------transaksi--------------- ========================================== //
+    //  =========================== --------------transaksi Add,Edit,Delete--------------- ========================================== //
     public function formAddTransaksi()
     {
         $data['judul'] = 'AddTransaksi';
@@ -261,7 +261,7 @@ class Admin extends Controller
             exit;
         }
     }
-    //  =========================== --------------PAKET--------------- ========================================== //
+    //  =========================== -------------- Add,Edit,Delete PAKET--------------- ========================================== //
 
     public function formAddPaket()
     {
@@ -286,8 +286,6 @@ class Admin extends Controller
         }
     }
 
-
-    // ---------------------------------------------------from edit paket ---------------------------------------------------//
     public function formEditPaket($id)
     {
         $data['judul'] = 'EditPaket';
@@ -310,7 +308,6 @@ class Admin extends Controller
             exit;
         }
     }
-
 
     public function deletePaket($id)
     {

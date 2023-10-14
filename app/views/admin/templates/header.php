@@ -41,6 +41,163 @@
             max-width: 80%;
             margin: 20px auto;
         }
+
+        /* CSS untuk dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        /* CSS untuk input teks dengan efek neon */
+        input[type="text"].neon {
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); */
+            outline: none;
+        }
+
+        /* Animasi neon saat di-fokus */
+        input[type="text"].neon:focus {
+            animation: neon 1.5s infinite alternate;
+        }
+
+        @keyframes neon {
+            0% {
+                box-shadow: 0 0 10px rgb(6 228 245 / 71%);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgb(6 228 245 / 0.9), 0 0 30px rgba(0, 0, 255, 0.6), 0 0 40px rgba(0, 0, 255, 0.4), 0 0 50px rgba(0, 0, 255, 0.2);
+            }
+        }
+
+
+        /* CSS untuk select */
+        /* CSS untuk select */
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 8px 16px 0px rgba(44, 185, 211, 0.5);
+            outline: none;
+            position: relative;
+        }
+
+
+        select.neon:hover {
+            animation: neon 1.5s infinite alternate;
+        }
+
+        select.neon:focus {
+            animation: neon 1.5s infinite alternate;
+        }
+
+        @keyframes neon {
+            0% {
+                box-shadow: 0px 8px 16px 0px rgba(44, 185, 211, 0.5);
+                /* Perbaikan nilai rgba */
+            }
+
+            100% {
+                box-shadow:
+                    0px 8px 16px 0px rgba(44, 185, 211, 0.5),
+                    0 0 30px rgba(44, 185, 211, 0.5),
+                    0 0 40px rgba(44, 185, 211, 0.5),
+                    0 0 50px rgba(44, 185, 211, 0.5);
+                /* Perbaikan nilai rgba */
+            }
+        }
+
+        /* CSS untuk tombol sort */
+        .dropbtn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover {
+            background-color: #2980b9;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #2f8935a1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgb(44 185 211 / 50%);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #3498db;
+        }
+
+        .icon-dropdown {
+            background-image: url(http://localhost/digitalCard/public/assets/img/icon/icons8-expand-arrow-16.png);
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            margin-top: 10px;
+            left: 0px;
+            margin-left: 24.5%;
+            position: absolute;
+            transition: transform 0.6s ease;
+            /* Menambahkan transisi untuk transformasi */
+        }
+
+        /* .icon-dropdown:hover {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .icon-dropdown.active {
+            transform: translateY(-50%) rotate(180deg);
+        } */
     </style>
 </head>
 
