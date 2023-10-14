@@ -98,7 +98,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="terjual">
                                 <label for="terjual">terjual</label>
                                 <span>:</span>
-                                <input name="sold" id="terjual" type="text" placeholder="Masukan terjual" readonly>
+                                <input name="sold" id="terjual" type="text" placeholder="Masukan terjual" value="0" readonly>
                             </div>
                             <div class="Category">
                                 <label for="Category">Category</label>

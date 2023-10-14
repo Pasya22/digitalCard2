@@ -43,11 +43,13 @@ $this->view('templates/navbar', $data);
 
                 <form action="<?= BASEURL ?>Katalog/addTransaksiUser" method="post">
                     <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
+                    <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
                     <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                     <input type="hidden" name="metode_trx" value="BCA">
                     <!-- yang metode di ganti dulu paket ya -->
-                    <input type="hidden" name="kode_trx" value="2345453">
-                    <input type="hidden" name="status_trx" value="Pending">
+                    <input type="hidden" name="paket_id" value="<?= $paket['paket']['paket_id'] ?>">
+                    <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
+                    <input type="hidden" name="status_trx" value="1">
 
                     <div class="title">
                         <h2><?= $data['katalog']['nama_katalog'] ?></h2>
@@ -57,7 +59,7 @@ $this->view('templates/navbar', $data);
                         <p> <?= $data['katalog']['deskripsi_katalog']; ?> </p>
                     </div>
                     <div class="harga">
-                        <h6>Harga : <?= $data['katalog']['harga'] ?></h6>
+                        <h6>Harga : Rp <?= number_format($data['katalog']['harga'], 0, ',', '.') ?></h6>
                         <input type="hidden" name="harga" value="<?= $data['katalog']['harga'] ?>">
                     </div>
                     <div class="stok">
@@ -76,6 +78,40 @@ $this->view('templates/navbar', $data);
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="content-paket">
+
+
+            <?php foreach ($data['paket']  as $paket) : ?>
+                <div class="container-paket">
+                    <div class="card-paket">
+                        <form action="<?= BASEURL ?>Katalog/addTransaksiPaket" method="post">
+                            <div class="header-paket">
+                                <h2 class="nama-paket"><?= $paket['nama_paket'] ?></h2>
+                                <input type="hidden" name="nama_paket" value="<?= $paket['nama_paket'] ?>">
+                            </div>
+                            <div class="deskripsi-paket">
+                                <?= $paket['fitur'] ?>
+                                <br>
+                                <?= 'Harga : Rp ' . number_format($paket['harga_paket'], 0, ',', '.') ?>
+                                <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>">
+                            </div>
+
+                            <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
+                            <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
+                            <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
+                            <input type="hidden" name="paket_id" value="<?= $paket['paket_id'] ?>">
+                            <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
+                            <input type="hidden" name="status_trx" value="1">
+                            <input type="hidden" name="total" value="0">
+                            <input type="hidden" name="jumlah" value="0">
+                            <br>
+                            <button type="submit" class="btn-beli">Beli Paket</button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach ?>
         </div>
         <div class="container-produk-category">
             <div class="header">
@@ -100,11 +136,15 @@ $this->view('templates/navbar', $data);
                     </div>
                 </div>
             </div>
+
             <div class="content-box">
                 <?php foreach ($data['kategori'] as $kategori) : ?>
-                    <?php $data['katalogId'] = $this->model('admin_model')->getKategoriByIdM8($kategori['id_kategori']); ?>
+                    <?php
+                    $katalogs = $this->model('admin_model')->getKategoriByIdM8($kategori['id_kategori']);
+
+                    ?>
                     <div class="contentCategory" id="content">
-                        <?php foreach ($data['katalogId'] as $katalog) : ?>
+                        <?php foreach ($katalogs as $katalog) : ?>
                             <div class="product-1">
                                 <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['katalog_id'] ?>">
                                     <figure>
@@ -119,8 +159,11 @@ $this->view('templates/navbar', $data);
                     </div>
                 <?php endforeach ?>
             </div>
+
         </div>
+
     </div>
+
 </main>
 <?php
 $this->view('templates/footer1', $data);

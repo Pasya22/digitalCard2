@@ -46,11 +46,11 @@ class Admin extends Controller
         $this->view('admin/Data/DataTransaksi', $data);
         $this->view('admin/templates/footer');
     }
-   
+
     public function filterByCategory()
     {
         $filter_by = $_POST['filter'];
-        $search_keyword = $_POST['search_keyword']; 
+        $search_keyword = $_POST['search_keyword'];
 
         if ($filter_by == 'kode_trx') {
             $data['trx'] = $this->model('admin_model')->getTransaksiByKodeTrx($search_keyword);
@@ -229,7 +229,7 @@ class Admin extends Controller
     public function formEditTrx($id)
     {
         $data['judul'] = 'EditTrx';
-        $data['trx'] = $this->model('admin_model')->getALLTransaksiById($id);
+        $data['trx'] = $this->model('admin_model')->getALLTransaksiJoinById($id);
         $this->view('admin/templates/header', $data);
         $this->view('admin/form/formEditTransaksi', $data);
         $this->view('admin/templates/footer');
@@ -251,7 +251,7 @@ class Admin extends Controller
     public function deleteTrx($id)
     {
 
-        if ($this->model('admin_model')->trxDelete($$id) > 0) {
+        if ($this->model('admin_model')->trxDelete($id) > 0) {
             Flasher::setFlash('', 'hapus Data Transaksi', 'Berhasil ', 'success');
             header('Location: ' . BASEURL . 'Admin/DataTransaksi');
             exit;

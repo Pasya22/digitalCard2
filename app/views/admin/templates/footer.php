@@ -39,7 +39,8 @@
             const amountQuery = amountSearch.value.toLowerCase();
 
             tableRows.forEach(row => {
-                const status = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
+                const status = row.querySelector('td:nth-child(8)').textContent.toLowerCase();
+                console.log('status', status);
                 const customer = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
                 const amount = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
 
@@ -82,6 +83,7 @@
         ascCheckbox.addEventListener('change', () => sortTable(ascCheckbox.checked));
     });
 
+    
 
     // function applyFilters() {
     //     var inputCustomer = document.getElementById("filterCustomer").value.toUpperCase();
@@ -194,6 +196,7 @@
                 'sourceEditing'
             ],
             shouldNotGroupWhenFull: true
+
         },
         // Changing the language of the interface requires loading the language file using the <script> tag.
         // language: 'es',

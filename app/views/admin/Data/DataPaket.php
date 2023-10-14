@@ -57,10 +57,6 @@ if (!$_SESSION["user_session"]) {
                             <th>No</th>
                             <th>Nama Paket</th>
                             <th>Nama kategori</th>
-                            <!-- <th>Paket A</th>
-                            <th>Paket B</th>
-                            <th>Paket C</th>
-                            <th>Paket D</th> -->
                             <th>Fitur</th>
                             <th>Aksi</th>
                         </tr>
@@ -68,6 +64,7 @@ if (!$_SESSION["user_session"]) {
 
                         <?php
                         $i = 1;
+
                         foreach ($data['paket'] as $item) {
 
                         ?>

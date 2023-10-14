@@ -1,106 +1,193 @@
 .container-detail-katalog {
-    width: 100%;
+  width: 100%;
 }
 
 .container-detail-katalog .container-detail {
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
 }
 
-.container-detail-katalog .container-detail>div {
-    width: calc(100% / 2);
+.container-detail-katalog .container-detail > div {
+  width: calc(100% / 2);
 }
 
-.container-detail-katalog .container-detail>div .title h2 {
-    text-transform: capitalize;
-    font-size: 40px;
-    line-height: 46px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.container-detail-katalog .container-detail > div .title h2 {
+  text-transform: capitalize;
+  font-size: 40px;
+  line-height: 46px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.container-detail-katalog .container-detail>div .deskripsi {
-    margin-top: 20px;
-    line-height: 24px;
-    display: -webkit-box;
-    -webkit-line-clamp: 18;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.container-detail-katalog .container-detail > div .deskripsi {
+  margin-top: 20px;
+  line-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 18;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.container-detail-katalog .container-detail>div .stok h6,
-.container-detail-katalog .container-detail>div .harga h6 {
-    margin-top: 20px;
-    font-size: 20px;
+.container-detail-katalog .container-detail > div .stok h6,
+.container-detail-katalog .container-detail > div .harga h6 {
+  margin-top: 20px;
+  font-size: 20px;
 }
 
-.container-detail-katalog .container-detail>div .button {
-    display: flex;
-    gap: 20px;
+.container-detail-katalog .container-detail > div .button {
+  display: flex;
+  gap: 20px;
 }
 
-.container-detail-katalog .container-detail>div button {
-    background-color: var(--buttonp-color);
-    margin-top: 20px;
-    padding: 8px 30px;
-    color: white;
-    border-radius: 8px;
+.container-detail-katalog .container-detail > div button {
+  background-color: var(--buttonp-color);
+  margin-top: 20px;
+  padding: 8px 30px;
+  color: white;
+  border-radius: 8px;
 }
 
 .thumbnails {
-    display: flex;
-    margin: 1rem auto 0;
-    padding: 0;
-    justify-content: center;
+  display: flex;
+  margin: 1rem auto 0;
+  padding: 0;
+  justify-content: center;
 }
 
 .thumbnail {
-    width: 70px;
-    height: 70px;
-    overflow: hidden;
-    list-style: none;
-    margin: 0 0.2rem;
-    cursor: pointer;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  list-style: none;
+  margin: 0 0.2rem;
+  cursor: pointer;
 }
 
 .thumbnail img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .thumbnail {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .thumbnail.is-active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .qty {
-    width: 40px;
-    height: 25px;
-    text-align: center;
-    margin-top: 20px;
-    border: 1px solid black !important;
+  width: 40px;
+  height: 25px;
+  text-align: center;
+  margin-top: 20px;
+  border: 1px solid black !important;
 }
 
-
-
 input.qtyplus {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 input.qtyminus {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* .container-paket {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card-paket {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 30%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.nama-paket {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.deskripsi-paket {
+  font-size: 14px;
+} */
+.content-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* .product-1, */
+.container-paket {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.card-paket {
+  max-width: 300px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card-paket:hover {
+  transform: scale(1.05);
+}
+
+.header-paket {
+  margin-bottom: 20px;
+}
+
+.nama-paket {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.deskripsi-paket {
+  font-size: 16px;
+}
+
+.btn-beli {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-beli:hover {
+  background-color: #45a049;
+}
+
+.content-paket{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: center;
 }

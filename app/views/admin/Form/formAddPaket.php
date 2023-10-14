@@ -45,6 +45,11 @@ if (!$_SESSION["user_session"]) {
                                 <span>:</span>
                                 <input name="nama_paket" id="nama katalog" type="text" placeholder="Masukan Nama Paket" required>
                             </div>
+                            <div class="nama katalog">
+                                <label for="nama katalog">harga paket</label>
+                                <span>:</span>
+                                <input name="harga_paket" id="harga_paket" type="text" placeholder="Masukan harga paket">
+                            </div>
                             <div class="Category">
                                 <label for="Category">Nama kategori</label>
                                 <span>:</span>

@@ -11,7 +11,7 @@ class Home extends Controller
         // $data['allkecamatan'] = $this->model('Wilayah_model')->getALLKecamatan();
         $data['kategori'] = $this->model('admin_model')->getALLKategori();
         $data['katalog'] = $this->model('admin_model')->getALLKatalog();
-        $data['produk1'] = $this->model('admin_model')->getALLKatalogById('katalog_id');
+        $data['produk1'] = $this->model('admin_model')->getALLKatalogById(8);
         $data['produk2'] = $this->model('admin_model')->getALLKatalogById(15);
         $username = $this->model('auth_model')->getLoggedInUsername();
         $data['username'] = $username;

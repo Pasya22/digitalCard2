@@ -30,11 +30,14 @@ $this->view('templates/navbar', $data);
             </div>
             <div class="content-box">
                 <?php foreach ($data['kategori'] as $kategori) : ?>
-                    <?php $data['katalogId'] = $this->model('admin_model')->getALLKatalogKategoriById($kategori['id_kategori']); ?>
+                    <?php
+                    $data['katalogId'] = $this->model('admin_model')->getALLKatalogKategoriById($kategori['id_kategori']);
+                    // $pakets = $this->model('admin_model')->getPaketByKategoriId($kategori['id_kategori']);
+                    ?>
                     <div class="contentCategory" id="content">
                         <?php foreach ($data['katalogId'] as $katalog) : ?>
                             <div class="product-1">
-                                <a href="<?= BASEURL .'Katalog/detail/'.$katalog['katalog_id']?>">
+                                <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['katalog_id'] ?>">
                                     <figure>
                                         <img src="<?= BASEURL ?>assets/img/katalog/<?= $katalog['nama_gambar'] ?>" alt=''>
                                     </figure>
@@ -42,11 +45,14 @@ $this->view('templates/navbar', $data);
                                         <h5><?= $katalog['nama_katalog'] ?></h5>
                                     </div>
                                 </a>
+                                <!-- Show associated packages -->
                             </div>
+                            
                         <?php endforeach ?>
                     </div>
                 <?php endforeach ?>
             </div>
+
         </div>
     </div>
 </main>
