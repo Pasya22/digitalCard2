@@ -45,7 +45,7 @@
                     echo "class='active'";
                 } ?>>
                     <a href="<?= BASEURL ?>Admin/DataPaket">
-                        <i class="fa-solid fa-landmark"></i>
+                        <i class="fa fa-cube"></i>
                         <p>PAKET</p>
                     </a>
                 </li>
@@ -54,7 +54,7 @@
                 } ?>>
                     <a href="<?= BASEURL ?>Admin/DataReport">
                         <i class="fa-solid fa-receipt"></i>
-                        <p>REPORT <br>(Comming Soon)</p>
+                        <p>REPORT <br></p>
                     </a>
                 </li>
             </ul>

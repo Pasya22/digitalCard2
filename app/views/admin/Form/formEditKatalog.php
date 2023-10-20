@@ -124,17 +124,22 @@ if (!$_SESSION["user_session"]) {
                             <div class="nama katalog">
                                 <label for="nama katalog">nama katalog</label>
                                 <span>:</span>
-                                <input name="nama_katalog" id="nama katalog" type="text" placeholder="Masukan nama katalog" value="<?= $data['catalog']['nama_katalog'] ?>" required>
+                                <input name="nama_katalog" id="nama katalog" type="text" placeholder="Masukan nama katalog" value="<?= $data['catalog']['nama_katalog'] ?>">
                             </div>
                             <div class="harga">
                                 <label for="harga">harga</label>
                                 <span>:</span>
-                                <input name="harga" id="harga" type="text" placeholder="Masukan harga" value="<?= $data['catalog']['harga'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57" required>
+                                <input name="harga" id="harga" type="text" placeholder="Masukan harga" value="<?= $data['catalog']['harga'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                             </div>
                             <div class="stok">
                                 <label for="stok">stok</label>
                                 <span>:</span>
-                                <input name="stock" id="stok" type="text" placeholder="Masukan stok" value="<?= $data['catalog']['stock'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57" required>
+                                <input name="stock" id="stok" type="text" placeholder="Masukan stok" value="<?= $data['catalog']['stock'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57" >
+                            </div>
+                            <div class="stok">
+                                <label for="stok">tanggal masuk stok</label>
+                                <span>:</span>
+                                <input name="tgl_masuk_stock" id="tgl_masuk_stock" type="datetime-local" value="<?= $data['catalog']['tgl_masuk_stock'] ?>">
                             </div>
                             <div class="terjual">
                                 <label for="terjual">terjual</label>

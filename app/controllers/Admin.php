@@ -1,5 +1,7 @@
 <?php
 
+use Com\Tecnick\Pdf\Tcpdf;
+
 class Admin extends Controller
 {
     public function index()
@@ -22,6 +24,7 @@ class Admin extends Controller
         $this->view('admin/Data/DataUser', $data);
         $this->view('admin/templates/footer');
     }
+    // END view data user==========================================---------------------------////
 
     // view data Katalog==========================================---------------------------////
     public function DataKatalog()
@@ -34,6 +37,10 @@ class Admin extends Controller
         $this->view('admin/Data/Datakatalog', $data);
         $this->view('admin/templates/footer');
     }
+
+    // END view data Katalog==========================================---------------------------////
+
+
     // view data Transaksi ==========================================---------------------------////
     public function DataTransaksi()
     {
@@ -59,14 +66,13 @@ class Admin extends Controller
         } elseif ($filter_by == 'username') {
             $data['trx'] = $this->model('admin_model')->getTransaksiByUsername($search_keyword);
         }
-
-        // ... (kode lainnya)
         $data['judul'] = 'Data Transaksi';
         $this->view('admin/templates/header', $data);
         $this->view('admin/Data/DataTransaksi', $data);
         $this->view('admin/templates/footer');
     }
 
+    // END view data Transaksi ==========================================---------------------------////
 
 
 
@@ -83,6 +89,40 @@ class Admin extends Controller
         $this->view('admin/templates/footer');
     }
 
+    // END view data Paket ==========================================---------------------------////
+
+    // view data Paket ==========================================---------------------------////
+    public function DataReport()
+    {
+        $data['judul'] = 'Data Report';
+
+        $data['reports'] = $this->model('admin_model')->getALLDataReport();
+        $data['subtotal'] = $this->model('admin_model')->getALLDataReports();
+        // Load TCPDF
+
+        // Load view  
+        $this->view('admin/templates/header', $data);
+        $this->view('admin/Data/DataReport', $data);
+        $this->view('admin/templates/footer');
+    }
+
+    public function filterByTanggalKeluar()
+    {
+        $data['judul'] = 'Data Report';
+        $start_date = $_POST['start_date'] . ' 00:01:01'; // Ambil tanggal mulai dari formulir
+        $end_date = $_POST['end_date'] . ' 23:59:59'; // Ambil tanggal selesai dari formulir
+
+        $data['reports'] = $this->model('admin_model')->getDataByTanggalHariIni($start_date, $end_date);
+        // echo json_encode($data['reports']);
+        $this->view('admin/templates/header', $data);
+        $this->view('admin/Data/DataReport', $data);
+        $this->view('admin/templates/footer');
+    }
+
+
+
+
+    // END view data Paket ==========================================---------------------------////
 
     // validate Add,EDIT,DELETE User ===========================================================
 

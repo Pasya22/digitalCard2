@@ -47,7 +47,7 @@ if (!$_SESSION["user_session"]) {
                                         <img id="preview-selected-image">
                                         <label for="gambar" class="lbl-img">
                                             <i class="fa-solid fa-pen-to-square"></i>
-                                            <input name="nama_gambar" type="file" id="gambar" accept="image/*" onchange="previewImage(event);" required>
+                                            <input name="nama_gambar" type="file" id="gambar" accept="image/*" onchange="previewImage(event);">
                                         </label>
                                     </figure>
                                     <figure>
@@ -95,8 +95,13 @@ if (!$_SESSION["user_session"]) {
                                 <span>:</span>
                                 <input name="stock" id="stok" type="text" placeholder="Masukan stok" required>
                             </div>
-                            <div class="terjual">
-                                <label for="terjual">terjual</label>
+                            <div class="tgl_masuk_stock">
+                                <label for="tgl_masuk_stock">tanggal masuk stok</label>
+                                <span>:</span>
+                                <input name="tgl_masuk_stock" id="tgl_masuk_stock" type="datetime-local">
+                            </div>
+                            <div class="sold">
+                                <label for="sold">terjual</label>
                                 <span>:</span>
                                 <input name="sold" id="terjual" type="text" placeholder="Masukan terjual" value="0" readonly>
                             </div>
@@ -111,14 +116,14 @@ if (!$_SESSION["user_session"]) {
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="deskripsi ">
+                            <div class="deskripsi">
                                 <label for="deskripsi">deskripsi</label>
                                 <span>:</span>
-                                <textarea id="editor" name="deskripsi_katalog" cols="30" rows="20"></textarea>
+                                <textarea name="deskripsi_katalog" class="deskrip" cols="30" rows="20"></textarea>
                             </div>
                             <div class="button-box">
                                 <button type="submit" name="submit">Simpan</button>
-                            </div> 
+                            </div>
                         </form>
                     </div>
                 </div>

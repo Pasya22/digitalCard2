@@ -24,7 +24,7 @@ class admin_model extends Controller
         $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id_user DESC');
         return $this->db->resultSet();
     }
-   
+
 
     public function getALLUserById($id)
     {
@@ -181,22 +181,31 @@ class admin_model extends Controller
 
     public function tambahDatakatalog($data)
     {
-
+        // var_dump($data);
+        // die;
+        // value gambar ===========================
         $gambar = $this->model('admin_model')->upload();
         $gambar2 = $this->model('admin_model')->upload2();
         $gambar3 = $this->model('admin_model')->upload3();
         $gambar4 = $this->model('admin_model')->upload4();
         $gambar5 = $this->model('admin_model')->upload5();
 
+        // get tanggal dan waktu berdasarkan waktu indonesia
+
 
         $query = "INSERT INTO catalog
                                 VALUES
-                                ('', :nama_katalog, :deskripsi_katalog, :nama_gambar,:nama_gambar2,:nama_gambar3,:nama_gambar4,:nama_gambar5,:kategori_id, :harga, :stock ,:sold)
-                                ";
+                                ('', :tgl_masuk_stock, :nama_katalog, :deskripsi_katalog, :nama_gambar,:nama_gambar2,:nama_gambar3,:nama_gambar4,:nama_gambar5,:kategori_id, :harga, :stock ,:sold)";
 
         $this->db->query($query);
+        $this->db->bind('tgl_masuk_stock', $data['tgl_masuk_stock']);
         $this->db->bind('nama_katalog', $data['nama_katalog']);
-        $this->db->bind('deskripsi_katalog', strip_tags($data['deskripsi_katalog']));
+
+        $deskripsi_katalog = $data['deskripsi_katalog'];
+        $deskripsi_katalog = preg_replace("/\r\n(?![0-9]+\))/", " <br> ", $deskripsi_katalog);
+        $deskripsi_katalog = htmlspecialchars($deskripsi_katalog);
+        $this->db->bind('deskripsi_katalog', $deskripsi_katalog);
+        // $this->db->bind('deskripsi_katalog', $data['deskripsi_katalog']);
         $this->db->bind('nama_gambar', $gambar);
         $this->db->bind('nama_gambar2', $gambar2);
         $this->db->bind('nama_gambar3', $gambar3);
@@ -250,6 +259,7 @@ class admin_model extends Controller
         }
 
         $query = "UPDATE catalog SET 
+                    tgl_masuk_stock = :tgl_masuk_stock,
                     nama_katalog = :nama_katalog,
                     deskripsi_katalog = :deskripsi_katalog,
                     nama_gambar = :nama_gambar,
@@ -266,6 +276,7 @@ class admin_model extends Controller
         $this->db->query($query);
 
         $this->db->bind('katalog_id', $data['katalog_id']);
+        $this->db->bind('tgl_masuk_stock', $data['tgl_masuk_stock']);
         $this->db->bind('nama_katalog', $data['nama_katalog']);
         $this->db->bind('deskripsi_katalog', strip_tags($data['deskripsi_katalog']));
         $this->db->bind('nama_gambar', $gambar1);
@@ -388,10 +399,13 @@ class admin_model extends Controller
 
         $total = $harga * $data['jumlah'];
 
-        $query = "INSERT INTO transaksi (kode_trx, id_user, katalog_id, kategori_id, paket_id, total, jumlah, status_trx)
-              VALUES (:kode_trx, :id_user, :katalog_id, :kategori_id, :paket_id, :total, :jumlah, :status_trx)";
+        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, katalog_id, kategori_id, paket_id, total, jumlah, status_trx)
+              VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :katalog_id, :kategori_id, :paket_id, :total, :jumlah, :status_trx)";
+
+        $tgl_keluar_stock = date('Y-m-d H:i:s');
 
         $this->db->query($query);
+        $this->db->bind('tgl_keluar_stock', $tgl_keluar_stock);
         $this->db->bind('kode_trx', $data['kode_trx']);
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('katalog_id', $data['katalog_id']);
@@ -409,12 +423,15 @@ class admin_model extends Controller
 
     public function tambahDataTrxPaket($data) //add data transaksi user a choices bought by paket 
     {
-        $query = "INSERT INTO transaksi (kode_trx, id_user, katalog_id, kategori_id, paket_id, total, jumlah, status_trx)
-                  VALUES (:kode_trx, :id_user, :katalog_id, :kategori_id, :paket_id, :total, :jumlah, :status_trx)";
+        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, katalog_id, kategori_id, paket_id, total, jumlah, status_trx)
+                  VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :katalog_id, :kategori_id, :paket_id, :total, :jumlah, :status_trx)";
 
         // var_dump($data);
         // die;
+        // Mendapatkan tanggal dan waktu saat ini
+        $tgl_keluar_stock = date('Y-m-d H:i:s');
         $this->db->query($query);
+        $this->db->bind('tgl_keluar_stock', $tgl_keluar_stock);
         $this->db->bind('kode_trx', $data['kode_trx']);
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('katalog_id', $data['katalog_id']);
@@ -630,7 +647,71 @@ class admin_model extends Controller
     // END TRANSAKSI    //--------------------------------------------------------------------
 
 
-    // end data katalog==============--------------------------------------------------///
+    //  data report==============--------------------------------------------------///
+
+    public function getALLDataFilterReport($tanggal_mulai, $tanggal_selesai)
+    {
+
+        $query = "SELECT transaksi.kode_trx, catalog.tgl_masuk_stock, transaksi.tgl_keluar_stock, transaksi.jumlah, transaksi.total, transaksi.status_trx
+                  FROM transaksi
+                  INNER JOIN catalog ON transaksi.katalog_id = catalog.katalog_id
+                  WHERE transaksi.tgl_keluar_stock BETWEEN :tanggal_mulai AND :tanggal_selesai  ORDER BY transaksi.trx_id DESC";
+
+        $this->db->query($query);
+        $this->db->bind(':tanggal_mulai', $tanggal_mulai);
+        $this->db->bind(':tanggal_selesai', $tanggal_selesai);
+        return  $this->db->resultSet();
+    }
+
+    // yang ini untuk di datareport view default
+    public function getALLDataReport()
+    {
+        $this->db->query('SELECT transaksi.kode_trx, catalog.tgl_masuk_stock, transaksi.tgl_keluar_stock, transaksi.jumlah, transaksi.total, transaksi.status_trx
+                            FROM transaksi
+                            INNER JOIN catalog ON transaksi.katalog_id = catalog.katalog_id 
+                            ORDER BY transaksi.trx_id DESC');
+        return $this->db->resultSet();
+    }
+    public function getALLDataReports()
+    {
+        $this->db->query('SELECT transaksi.kode_trx, catalog.tgl_masuk_stock, transaksi.tgl_keluar_stock, transaksi.jumlah, SUM(transaksi.total) as total, transaksi.status_trx
+                            FROM transaksi
+                            INNER JOIN catalog ON transaksi.katalog_id = catalog.katalog_id 
+                            ORDER BY transaksi.trx_id DESC');
+        return $this->db->resultSet();
+    }
+
+    // dan ini filter untuk menampilkan data
+    public function getDataByTanggalHariIni($start_date, $end_date)
+
+    {
+        $start_date = $start_date . ' 00:01:01';
+        $end_date = $end_date . ' 23:59:59';
+        $this->db->query("SELECT catalog.nama_katalog, 
+                                  catalog.tgl_masuk_stock, 
+                                  transaksi.kode_trx,   
+                                  transaksi.tgl_keluar_stock, 
+                                  transaksi.jumlah, 
+                                  transaksi.total, 
+                                  transaksi.status_trx 
+                           FROM transaksi
+                           INNER JOIN catalog ON transaksi.katalog_id = catalog.katalog_id
+                           WHERE transaksi.tgl_keluar_stock >= :start_date AND transaksi.tgl_keluar_stock <= :end_date
+                           ORDER BY transaksi.trx_id DESC");
+
+        $this->db->bind(':start_date', $start_date);
+        $this->db->bind(':end_date', $end_date);
+
+        return $this->db->resultSet();
+    }
+
+
+
+
+
+
+
+    // end data report==============--------------------------------------------------///
 
 
     // DATA upload ===================---------------------------

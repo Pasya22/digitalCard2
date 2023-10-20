@@ -46,7 +46,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="Category">
                                 <label for="sortByPrice">filter harga </label>
                                 <span>:</span>
-                                <select id="sortByPrice" onchange="applyFilters()">
+                                <select id="sortByPrice" onchange="applyFilters()" class="neon">
                                     <option value="normal"> pilih berdasarkan harga </option>
                                     <option value="asc">Terkecil ke Terbesar</option>
                                     <option value="desc">Terbesar ke Terkecil</option>
@@ -65,15 +65,17 @@ if (!$_SESSION["user_session"]) {
                                 </label>
                                 <button onclick="resetFilters()" class="resetBtn btn btn-secondary">Reset</button>
                             </div>
-                        </form> 
+                        </form>
                     </div>
                     <table id="myTable">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal Stok Masuk</th>
                                 <th>Foto</th>
                                 <th>Nama Katalog</th>
                                 <th>Harga</th>
+                                <!-- <th>deskripsi</th> -->
                                 <th>Stok</th>
                                 <th>Terjual</th>
                                 <th>Aksi</th>
@@ -86,9 +88,17 @@ if (!$_SESSION["user_session"]) {
                             ?>
                                 <tr class="table-active table-row">
                                     <td><?= $i++; ?></td>
+                                    <td><?= $item['tgl_masuk_stock'] ?></td>
                                     <td class="image-katalog"><img src="<?= BASEURL . 'assets/img/katalog/' . $item['nama_gambar'] ?>" alt="" style="width:50%; height:4pc; text-align:center;"></td>
                                     <td><?= $item['nama_katalog'] ?></td>
                                     <td><?= $item['harga'] ?></td>
+                                    <!-- <td>
+                                        <?php
+                                        $deskripsi_katalog = htmlspecialchars_decode($item['deskripsi_katalog']);
+                                        $deskripsi_katalog = str_replace("<br>", "<br>", $deskripsi_katalog);
+                                        echo  $deskripsi_katalog . "<br>";
+                                        ?>
+                                    </td> -->
                                     <td><?= $item['stock'] ?></td>
                                     <td><?= $item['sold'] ?></td>
                                     <td>
@@ -96,12 +106,15 @@ if (!$_SESSION["user_session"]) {
                                         <a class="hapus" href="<?= BASEURL . 'Admin/deleteKatalog/' . $item['katalog_id'] ?>">Delete</a>
                                     </td>
                                 </tr>
+
                             <?php } ?>
                         </tbody>
-                    </table> 
+                    </table>
+
                 </div>
             </div>
         </main>
+
         <footer></footer>
     </div>
 </div>
@@ -119,7 +132,7 @@ if (!$_SESSION["user_session"]) {
         var filterTerjual = document.getElementById('filterTerjual').checked;
 
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
+            td = tr[i].getElementsByTagName("td")[3];
             if (td) {
                 txtValue = td.textContent || td.innerText;
 
@@ -127,11 +140,11 @@ if (!$_SESSION["user_session"]) {
                 var nameFilter = txtValue.toUpperCase().indexOf(filter) > -1;
 
                 // Filter by Stok
-                var stok = parseInt(tr[i].getElementsByTagName('td')[4].innerText);
+                var stok = parseInt(tr[i].getElementsByTagName('td')[5].innerText);
                 var filterStokCondition = !filterStok || (filterStok && stok !== 0);
 
                 // Filter by Terjual
-                var terjual = parseInt(tr[i].getElementsByTagName('td')[5].innerText);
+                var terjual = parseInt(tr[i].getElementsByTagName('td')[6].innerText);
                 var filterTerjualCondition = !filterTerjual || (filterTerjual && terjual !== 0);
 
                 // Apply Filters
@@ -152,8 +165,8 @@ if (!$_SESSION["user_session"]) {
             while (switching) {
                 switching = false;
                 for (i = 1; i < (rows.length - 1); i++) {
-                    x = rows[i].getElementsByTagName("TD")[3].innerText;
-                    y = rows[i + 1].getElementsByTagName("TD")[3].innerText;
+                    x = rows[i].getElementsByTagName("TD")[4].innerText;
+                    y = rows[i + 1].getElementsByTagName("TD")[4].innerText;
 
                     var xValue = parseInt(x.replace(/[^\d]/g, ''), 10);
                     var yValue = parseInt(y.replace(/[^\d]/g, ''), 10);

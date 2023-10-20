@@ -32,27 +32,33 @@ if (!$_SESSION["user_session"]) {
                         </div>
                     </div>
                     <div class="container-form">
+                        <label>Status:
+                            <select id="paket" class="neon">
+                                <option value="all">All</option> 
+                                <option value="Paket Comunity">Paket Comunity</option>
+                                <option value="Paket Super">Paket Super</option>
+                                <option value="Paket Basic">Paket Basic </option>
+                            </select>
+                            <i class="icon-dropdown"></i>
+                        </label>  
+                        <label>Cari fitur:
+                            <input type="text" id="fitur" class="neonIn" placeholder="Masukan kata Kunci">
+                        </label>
 
-                        <form id="searchForm">
-                            <div class="Category">
-                                <label for="filter">Filter Paket</label>
-                                <span>:</span>
-                                <select name="filter" id="filter" style=" width:18%;">
-                                    <option value=" " style="text-align: center;">-- Silahkan Pilih Filter --</option>
-                                    <option value="semua">Berdasarkan ALL</option>
-                                    <option value="kode_trx">Berdasarkan Kode TRX</option>
-                                    <option value="nama_katalog">Berdasarkan Nama Katalog</option>
-                                    <option value="username">Berdasarkan Nama Customer</option>
-                                    <option value="metode_trx">Berdasarkan metode</option>
-                                    <option value="jumlah">Berdasarkan jumlah</option>
-                                    <option value="status_trx">Berdasarkan status</option>
-                                </select>
-                                <input name="search_keyword" id="search_keyword" type="text" placeholder=" Setelah Memilih Filter, Silahkan Masukkan Kata Kunci Filter">
+                        <label>
+                            <div class="dropdown">
+                                <button class="dropbtn">Sort Direction</button>
+                                <div class="dropdown-content">
+                                    <a href="#" id="ascOption">Ascending</a>
+                                    <a href="#" id="descOption">Descending</a>
+                                </div>
                             </div>
-                            <!-- <button type="submit">Filter</button> -->
-                        </form>
+
+                        </label>
+
                     </div>
-                    <table>
+
+                    <table id="datatable">
                         <tr>
                             <th>No</th>
                             <th>Nama Paket</th>

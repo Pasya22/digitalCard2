@@ -2,7 +2,9 @@
 
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
+
 <script src="https://kit.fontawesome.com/09e00d7278.js" crossorigin="anonymous"></script>
 <script src="<?= BASEURL; ?>js/script.js"></script>
 <script>
@@ -21,10 +23,10 @@
             const amountQuery = amountSearch.value.toLowerCase();
 
             tableRows.forEach(row => {
-                const status = row.querySelector('td:nth-child(8)').textContent.toLowerCase();
+                const status = row.querySelector('td:nth-child(9)').textContent.toLowerCase();
                 console.log('status', status);
-                const customer = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                const amount = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+                const customer = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const amount = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
 
                 const statusMatch = selectedStatus === 'all' || status === selectedStatus;
                 const customerMatch = customer.includes(customerQuery);
@@ -42,8 +44,8 @@
             const rows = Array.from(tableRows);
 
             rows.sort((a, b) => {
-                const aValue = parseInt(a.querySelector('td:nth-child(6)').textContent);
-                const bValue = parseInt(b.querySelector('td:nth-child(6)').textContent);
+                const aValue = parseInt(a.querySelector('td:nth-child(1)').textContent);
+                const bValue = parseInt(b.querySelector('td:nth-child(1)').textContent);
 
                 if (ascending) {
                     return aValue - bValue;
@@ -155,43 +157,371 @@
 
 <!----------------------------------------------------- dropdown transaksi ------------------------------------------------->
 <script>
-    // Dapatkan elemen dropdown dan ikon
     const dropdown = document.getElementById('statusFilter');
     const icon = document.querySelector('.icon-dropdown');
 
-    // Tambahkan event listener untuk mengubah ikon ketika dropdown dipilih
     dropdown.addEventListener('change', function() {
         icon.classList.add('active');
         icon.style.transform = 'rotate(90deg)';
     });
 
-    // Tambahkan event listener untuk mengubah ikon ketika dropdown di-hover
-    dropdown.addEventListener('mouseover', function() {
-        if (!icon.classList.contains('active')) {
-            icon.style.transform = 'rotate(0deg)';
-        }
-    });
-
-    // Kembalikan ikon ke posisi normal saat mouse meninggalkan dropdown
-    dropdown.addEventListener('mouseout', function() {
+    dropdown.addEventListener('click', function(event) {
+        event.stopPropagation(); // Mencegah event klik dari menyebar ke elemen dokumen
         if (!icon.classList.contains('active')) {
             icon.style.transform = 'rotate(180deg)';
+        } else {
+            icon.style.transform = 'rotate(0deg)';
         }
+        icon.classList.toggle('active');
     });
 
-    // Tambahkan event listener untuk membatalkan perubahan ikon saat ikon di-klik kembali
-    icon.addEventListener('click', function(event) {
-        event.stopPropagation(); // Menghentikan event klik dari memicu event listener dokumen
-        icon.classList.remove('active');
-        icon.style.transform = 'rotate(0deg)';
-    });
-
-    // Tambahkan event listener ke elemen dokumen untuk menanggapi klik di luar dropdown atau ikon
     document.addEventListener('click', function() {
         icon.classList.remove('active');
         icon.style.transform = 'rotate(0deg)';
     });
 </script>
+<!-- =========================================== data paket ========================================================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var paket = document.getElementById('paket');
+        var fiturFilter = document.getElementById('fitur');
+        // var ascOption = document.getElementById('ascOption');
+        // var descOption = document.getElementById('descOption');
+        var table2 = document.getElementById('datatable');
+
+        function applyFilters() {
+            var paketValue = paket.value;
+            var fiturValue = fiturFilter.value.toLowerCase();
+
+            var rows = table2.querySelectorAll('tbody tr');
+
+            rows.forEach(function(row) {
+                var nama_paket = row.cells[2].textContent.toLowerCase();
+                var nama_kategori = row.cells[3].textContent.toLowerCase();
+                var fitur = row.cells[4].textContent.toLowerCase();
+
+                var showRow = true;
+
+                if (paketValue !== 'all' && nama_kategori !== paketValue) {
+                    showRow = false;
+                }
+
+                if (fiturValue !== '' && (fitur.indexOf(fiturValue) === -1 && nama_paket.indexOf(fiturValue) === -1)) {
+                    showRow = false;
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        function sortTable(sortDirection) {
+            var rowsArray = Array.from(table.rows);
+
+            rowsArray.sort(function(row1, row2) {
+                var cell1 = row1.cells[0].textContent.trim();
+                var cell2 = row2.cells[0].textContent.trim();
+
+                if (sortDirection === 'asc') {
+                    return cell1 - cell2;
+                } else if (sortDirection === 'desc') {
+                    return cell2 - cell1;
+                }
+            });
+
+            for (var i = 0; i < rowsArray.length; i++) {
+                table.appendChild(rowsArray[i]);
+            }
+        }
+
+        ascOption.addEventListener('click', function() {
+            sortTable('asc');
+        });
+
+        descOption.addEventListener('click', function() {
+            sortTable('desc');
+        });
+
+        paket.addEventListener('change', applyFilters);
+        fiturFilter.addEventListener('input', applyFilters);
+    });
+</script>
+<!-- =========================================== data paket ========================================================== -->
+
+
+
+<!-- ==================================================== data report ============================================================= -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?= BASEURL . 'jspdf/dist/html2pdf.bundle.min.js' ?>"></script>
+<script src="<?= BASEURL . 'jsexcel/dist/xlsx.full.min.js' ?>"></script>
+<!-- <script src="https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        TableTools.DEFAULTS.aButtons = ["copy", "csv", "xls"];
+
+        $('#laporanBody').dataTable({
+            "sDom": 'T<"clear">lfrtip'
+        });
+    });
+</script> -->
+<script>
+    $(document).ready(function() {
+        $("#filterForm").submit(function(e) {
+            e.preventDefault();
+            var startDate = $("#tanggal_mulai").val() + ' 00:01:01';
+            var endDate = $("#tanggal_selesai").val() + ' 23:59:59';
+
+            startDate = new Date(startDate);
+            endDate = new Date(endDate);
+
+            $("#laporanBody tr").each(function() {
+                var rowDate = new Date($(this).find("td:eq(2)").text()); // Ubah angka (1) sesuai dengan kolom tanggal masuk
+
+                if (rowDate >= startDate && rowDate <= endDate) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+<script>
+    var filterApplied = false;
+
+    function exportToExcel() {
+        var dataToExport = filterApplied ? getFilteredData() : getAllData();
+        var ws = XLSX.utils.aoa_to_sheet(dataToExport);
+
+        // Konfigurasi kolom untuk memformat field
+        ws["!cols"] = [{
+                wch: 15
+            },
+            {
+                wch: 15
+            },
+            {
+                wch: 15
+            },
+            {
+                wch: 10
+            },
+            {
+                wch: 15
+            } // Ubah wch dari 10 menjadi 15 untuk memperluas lebar kolom total
+        ];
+
+
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+        XLSX.writeFile(wb, 'Report.xlsx');
+    }
+
+    function getAllData() {
+        var table = document.getElementById("laporanTable");
+        var rows = table.getElementsByTagName("tr");
+        var allData = [];
+
+
+        var headerRow = [];
+        var headerCols = rows[0].querySelectorAll("th");
+        for (var k = 0; k < headerCols.length; k++) {
+            headerRow.push(headerCols[k].innerText);
+        }
+        allData.push(headerRow);
+
+        for (var i = 0; i < rows.length; i++) {
+            var cols = rows[i].getElementsByTagName("td");
+            var row = [];
+
+            for (var j = 0; j < cols.length; j++) {
+                row.push(cols[j].innerText);
+            }
+
+            allData.push(row);
+            console.log(allData);
+        }
+
+        // Tambahkan baris total
+        // var totalRow = document.getElementById("totalOmset");
+        // totalRow.style.display = "none";
+
+        // var totalRow = ["", "", "", "", 'total'].document.getElementById("totalOmset").innerText;
+        // totalRow.push("", "", "", "", "Total :", document.getElementById("totalOmset").innerText);
+        // allData.push(totalRow);
+        // Tambahkan kolom kosong untuk "Total"
+
+
+        return allData;
+    }
+
+    // Event listener untuk form filter
+    document.getElementById("filterForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Menghindari pengiriman form
+        displayData(); // Tampilkan data setelah filter
+    });
+
+    function displayData() {
+        var filteredData = getFilteredData();
+        var tableBody = document.getElementById("laporanBody");
+        var total = 0;
+        tableBody.innerHTML = ""; // Bersihkan konten tabel
+
+        for (var i = 0; i < filteredData.length; i++) {
+            var row = document.createElement("tr");
+
+            for (var j = 0; j < filteredData[i].length; j++) {
+                var cell = document.createElement("td");
+                cell.textContent = filteredData[i][j];
+                row.appendChild(cell);
+                if (i > 0) { // Melewati baris header
+                    total += parseInt(row[5].replace("Rp.", "").replace(".", "").trim());
+                }
+            }
+
+            tableBody.appendChild(row);
+
+        }
+
+
+        filterApplied = filteredData.length > 1; // Periksa apakah ada data selain header
+    }
+
+    function updateTotalOmset() {
+        var total = 0;
+        var rows = document.getElementById("laporanBody").getElementsByTagName("tr");
+        console.log(rows);
+        for (var i = 1; i < rows.length; i++) { // Dimulai dari 1 untuk melewati baris header
+            var cols = rows[i].getElementsByTagName("td");
+            var totalCol = cols[5]; // Kolom total (indeks 5)
+            if (totalCol) {
+                var value = totalCol.innerHTML.replace("Rp.", "").replace(".", "").trim();
+                total += parseInt(value);
+            }
+        }
+
+        document.getElementById("totalOmset").innerHTML = 'Rp.' + numberWithCommas(total);
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function getFilteredData() {
+        var startDate = new Date(document.getElementById("tanggal_mulai").value + "T00:01:01");
+        var endDate = new Date(document.getElementById("tanggal_selesai").value + "T23:51:01");
+        var table = document.getElementById("laporanTable");
+        var rows = table.getElementsByTagName("tr");
+        var filteredData = [];
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
+
+        var headerRow = [];
+        var headerCols = rows[0].querySelectorAll("th");
+        for (var k = 0; k < headerCols.length; k++) {
+            headerRow.push(headerCols[k].innerText);
+        }
+        filteredData.push(headerRow);
+
+        for (var i = 1; i < rows.length; i++) {
+            var cols = rows[i].querySelectorAll("td");
+
+            var trxDate = new Date(cols[2].innerText);
+            console.log("trxdat", trxDate);
+            if (trxDate >= startDate && trxDate <= endDate) {
+                var row = [];
+
+                for (var j = 0; j < cols.length; j++) {
+                    row.push(cols[j].innerText);
+                }
+                updateTotalOmset()
+                filteredData.push(row);
+                console.log(cols);
+            }
+        }
+
+        filterApplied = filteredData.length > 1; // Periksa apakah ada data selain header
+
+        console.log("Rows Length:", rows.length);
+        console.log("Filtered Data Length:", filteredData.length);
+
+        return filteredData;
+    }
+
+
+
+    function exportToPDF() {
+        /* Ambil konten HTML yang ingin Anda konversi */
+        var element = document.getElementById('laporanTable');
+
+        /* Konversi konten ke PDF */
+        html2pdf(element);
+        updateTotalOmset();
+    }
+
+    function printData() {
+        window.print();
+    }
+</script>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#filterForm").submit(function(e) {
+            e.preventDefault();
+            var startDate = $("#tanggal_mulai").val();
+            var endDate = $("#tanggal_selesai").val();
+
+            $.ajax({
+                url: "<?= BASEURL . 'Admin/filterByTanggalKeluar'; ?>",
+                type: "POST",
+                data: {
+                    start_date: startDate,
+                    end_date: endDate
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $("#laporanBody").empty(); // Bersihkan isi tbody
+                    $.each(data, function(i, item) {
+
+                        var row = '<tr>';
+                        row += '<td>' + item.kode_trx + '</td>';
+                        row += '<td>' + formattedTglMasuk + '</td>';
+                        row += '<td>' + formattedTglKeluar + '</td>';
+                        row += '<td>' + item.jumlah + '</td>';
+                        row += '<td>' + item.total + '</td>';
+                        row += '<td>' + getStatusLabel(item.status_trx) + '</td>';
+                        row += '</tr>';
+
+                        $("#laporanBody").append(row); // Tambahkan baris ke tbody
+                    });
+                },
+
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        function getStatusLabel(status_trx) {
+            switch (status_trx) {
+                case 1:
+                    return 'pending';
+                case 2:
+                    return 'successful';
+                case 3:
+                    return 'failed';
+                case 4:
+                    return 'refund';
+                default:
+                    return '';
+            }
+        }
+    });
+</script> -->
+
+<!-- ===================================================== end data report ============================================================ -->
 <!----------------------------------------------------- dropdown transaksi ------------------------------------------------->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>
 

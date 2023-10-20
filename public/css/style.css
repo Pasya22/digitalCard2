@@ -133,9 +133,12 @@
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
 }
-
+.deskrip{
+  width: 73%;
+  border-radius: 17px;
+}
 /* input:not([type="range"], [type="radio"]), */
-textarea,
+/* textarea, */
 select,
 option
 /* button  */ {

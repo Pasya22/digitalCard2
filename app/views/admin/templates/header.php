@@ -85,7 +85,7 @@
         }
 
         /* CSS untuk input teks dengan efek neon */
-        input[type="text"].neon {
+        input[type="text"].neonIn {
             border: none;
             border-radius: 5px;
             padding: 10px;
@@ -93,12 +93,12 @@
             outline: none;
         }
 
-        /* Animasi neon saat di-fokus */
-        input[type="text"].neon:focus {
-            animation: neon 1.5s infinite alternate;
+        /* Animasi neonIn saat di-fokus */
+        input[type="text"].neonIn:focus {
+            animation: neonIn 1.5s infinite alternate;
         }
 
-        @keyframes neon {
+        @keyframes neonIn {
             0% {
                 box-shadow: 0 0 10px rgb(6 228 245 / 71%);
             }
@@ -111,11 +111,14 @@
 
         /* CSS untuk select */
         /* CSS untuk select */
-        select {
+        .neon {
             padding: 10px;
             border-radius: 5px;
-            border: 1px solid #ccc;
-            box-shadow: 0px 8px 16px 0px rgba(44, 185, 211, 0.5);
+            color: white;
+            width: 10%;
+            border: 1px solid white;
+            /* box-shadow: 0px 8px 16px 0px rgba(44, 185, 211, 0.5); */
+            background-color: transparent;
             outline: none;
             position: relative;
         }
@@ -183,22 +186,45 @@
             width: 16px;
             height: 16px;
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 12px;
             left: 0px;
-            margin-left: 24.5%;
+            color: white;
+            margin-left: 27.5%;
             position: absolute;
             transition: transform 0.6s ease;
             /* Menambahkan transisi untuk transformasi */
         }
 
-        /* .icon-dropdown:hover {
+        .icon-dropdown.active {
             transform: translateY(-50%) rotate(180deg);
         }
 
-        .icon-dropdown.active {
-            transform: translateY(-50%) rotate(180deg);
-        } */
+        /* Gaya untuk tombol seram */
+        .btn-dark {
+            background-color: #2c3e50;
+            /* Warna latar belakang gelap */
+            border: none;
+            color: #ecf0f1;
+            /* Warna teks terang */
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            /* Untuk memberi jarak antar tombol */
+            transition: box-shadow 0.3s;
+        }
+
+        /* Hover effect untuk tombol seram */
+        .btn-dark:hover {
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+            /* Efek bayangan merah */
+        }
+
+        
     </style>
+
+
 </head>
 
 <body>

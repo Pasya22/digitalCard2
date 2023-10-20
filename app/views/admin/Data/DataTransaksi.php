@@ -30,9 +30,6 @@ if (!$_SESSION["user_session"]) {
                         </div> -->
                     </div>
                     <div class="container-form">
-
-                     
-
                         <label>Status:
                             <select id="statusFilter" class="neon">
                                 <option value="all">All</option>
@@ -43,18 +40,16 @@ if (!$_SESSION["user_session"]) {
                             </select>
                             <i class="icon-dropdown"></i>
                         </label>
-
-
                         <label>Cari Customer:
-                            <input type="text" id="customerSearch" class="neon">
+                            <input type="text" id="customerSearch" class="neonIn" placeholder="Masukan kata Kunci">
                         </label>
 
                         <label>Cari Jumlah:
-                            <input type="text" id="amountSearch" class="neon">
+                            <input type="text" id="amountSearch" class="neonIn" placeholder="Masukan kata Kunci">
                         </label>
 
                         <label>
-                            <input type="checkbox" id="ascCheckbox" class="neon"> Ascending/Descending
+                            <input type="checkbox" id="ascCheckbox" class="neonIn"> Ascending/Descending
                         </label>
                     </div>
 
@@ -62,6 +57,7 @@ if (!$_SESSION["user_session"]) {
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal Transaksi</th>
                                 <th>Customer</th>
                                 <th>Code TRX</th>
                                 <th>Catalog</th>
@@ -87,6 +83,7 @@ if (!$_SESSION["user_session"]) {
 
                             <tr class="table-active">
                                 <td><?= $i++; ?></td>
+                                <td><?= $item['tgl_keluar_stock'] ?></td>
                                 <td><?= $item['username'] ?></td>
                                 <td><?= $item['kode_trx'] ?></td>
                                 <td><?= $item['nama_katalog'] ?></td>

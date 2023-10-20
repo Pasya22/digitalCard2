@@ -1,47 +1,124 @@
 .container-admin {
-    width: 100%;
-    height: 100%;
-    display: flex;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 .container-content-admin {
-    width: calc(100% - 280px);
+  width: calc(100% - 280px);
 }
 
 .container-dashboard {
-    width: 100%;
-    padding: 20px;
+  width: 100%;
+  padding: 20px;
 }
 
 .container-dashboard ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .container-dashboard ul li {
-    width: calc(100% / 2 - 10px);
+  width: calc(100% / 2 - 10px);
 }
 
 .container-dashboard ul .item {
-    width: 100%;
-    text-align: center;
-    background-color: var(--card-black);
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    box-shadow: var(--content-shadow);
+  width: 100%;
+  text-align: center;
+  background-color: var(--card-black);
+  border-radius: 8px;
+  padding: 20px;
+  color: white;
+  box-shadow: var(--content-shadow);
 }
 
 .container-dashboard ul .item .icon i {
-    font-size: 60px;
-    margin-top: 20px;
+  font-size: 60px;
+  margin-top: 20px;
 }
 
 .container-dashboard ul .item .jumlah p {
-    margin-top: 20px;
-    font-size: 26px;
+  margin-top: 20px;
+  font-size: 26px;
 }
 
- 
+/* CSS untuk Tombol Filter */
+.filterForm .btn-neon {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filterForm .btn-neon:hover {
+  background-color: #0056b3;
+}
+
+/* CSS untuk Input Tanggal */
+.filterForm > .filter {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Gaya untuk tabel seram */
+.tabelseram {
+  border-collapse: collapse;
+  /* width: 100%; */
+  /* max-width: 800px; */
+  /* Sesuaikan lebar maksimum sesuai kebutuhan */
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+/* Gaya untuk header kolom */
+.tabelseram th {
+  background-color: #2c3e50;
+  /* Warna latar belakang gelap */
+  color: #ecf0f1;
+  /* Warna teks terang */
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #34495e;
+  /* Garis tepi */
+}
+
+/* Gaya untuk sel data */
+.tabelseram td {
+  padding: 10px;
+  border: 1px solid #34495e;
+  /* Garis tepi */
+  background-color: #34495e;
+  /* Warna latar belakang gelap */
+  color: #ecf0f1;
+  /* Warna teks terang */
+}
+
+/* Gaya untuk baris ganjil */
+.tabelseram tr:nth-child(odd) {
+  background-color: #2c3e50;
+  /* Warna latar belakang gelap */
+}
+
+/* Gaya tambahan untuk tabel rocker */
+.tabelrocker {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Efek bayangan */
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Hover effect untuk sel data */
+.tabelseram td:hover {
+  background-color: #73737361; /* Warna latar belakang abu-abu pada hover */
+  transition: background-color 0.3s;
+}

@@ -45,7 +45,7 @@ $this->view('templates/navbar', $data);
                     <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
                     <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
                     <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
-                    <input type="hidden" name="metode_trx" value="BCA">
+                    <input type="hidden" name="tgl_keluar_stock" value="<?= date('Y-m-d H:i:s') ?>">
                     <!-- yang metode di ganti dulu paket ya -->
                     <input type="hidden" name="paket_id" value="<?= $paket['paket']['paket_id'] ?>">
                     <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
@@ -56,10 +56,16 @@ $this->view('templates/navbar', $data);
                         <input type="hidden" name="nama_katalog" value="<?= $data['katalog']['nama_katalog'] ?>">
                     </div>
                     <div class="deskripsi">
-                        <p> <?= $data['katalog']['deskripsi_katalog']; ?> </p>
+                        <p style="text-align: justify;">
+                            <?php
+                            $deskripsi_katalog = htmlspecialchars_decode($data['katalog']['deskripsi_katalog']);
+                            $deskripsi_katalog = str_replace("<br>", "<br>", $deskripsi_katalog);
+                            echo "Deskripsi Katalog: " . $deskripsi_katalog . "<br>";
+                            ?>
+                        </p>
                     </div>
                     <div class="harga">
-                        <h6>Harga : Rp <?= number_format($data['katalog']['harga'], 0, ',', '.') ?></h6>
+                        <h6>Harga : Rp. <?= number_format($data['katalog']['harga'], 0, ',', '.') ?></h6>
                         <input type="hidden" name="harga" value="<?= $data['katalog']['harga'] ?>">
                     </div>
                     <div class="stok">
@@ -94,7 +100,7 @@ $this->view('templates/navbar', $data);
                             <div class="deskripsi-paket">
                                 <?= $paket['fitur'] ?>
                                 <br>
-                                <?= 'Harga : Rp ' . number_format($paket['harga_paket'], 0, ',', '.') ?>
+                                <?= 'Harga : Rp.' . number_format($paket['harga_paket'], 0, ',', '.') ?>
                                 <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>">
                             </div>
 
@@ -102,6 +108,7 @@ $this->view('templates/navbar', $data);
                             <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
                             <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                             <input type="hidden" name="paket_id" value="<?= $paket['paket_id'] ?>">
+                            <input type="hidden" name="tgl_keluar_stock" value="<?= date('Y-m-d H:i:s') ?>">
                             <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
                             <input type="hidden" name="status_trx" value="1">
                             <input type="hidden" name="total" value="0">
