@@ -91,7 +91,7 @@ if (!$_SESSION["user_session"]) {
                                     <td><?= $item['tgl_masuk_stock'] ?></td>
                                     <td class="image-katalog"><img src="<?= BASEURL . 'assets/img/katalog/' . $item['nama_gambar'] ?>" alt="" style="width:50%; height:4pc; text-align:center;"></td>
                                     <td><?= $item['nama_katalog'] ?></td>
-                                    <td><?= $item['harga'] ?></td>
+                                    <td><?= 'Rp.' . number_format($item['harga'], 0, ',', '.') ?></td>
                                     <!-- <td>
                                         <?php
                                         $deskripsi_katalog = htmlspecialchars_decode($item['deskripsi_katalog']);

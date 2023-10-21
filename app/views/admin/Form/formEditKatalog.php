@@ -161,7 +161,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="deskripsi ">
                                 <label for="deskripsi">deskripsi</label>
                                 <span>:</span>
-                                <textarea id="editor" name="deskripsi_katalog" cols="30" rows="20"><?= $data['catalog']['deskripsi_katalog'] ?></textarea>
+                                <textarea  class="deskrip" name="deskripsi_katalog" cols="30" rows="20"><?= $data['catalog']['deskripsi_katalog'] ?></textarea>
                             </div>
                             <div class="button-box">
                                 <button type="submit" name="submit">Ubah</button>

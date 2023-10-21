@@ -58,27 +58,48 @@ $this->view('templates/navbar', $data);
                     <div class="deskripsi">
                         <p style="text-align: justify;">
                             <?php
+                            // $deskripsi_katalog = htmlspecialchars_decode($data['katalog']['deskripsi_katalog']);
+                            // $deskripsi_katalog = str_replace(".", "<br>", $deskripsi_katalog);
+
+                            // if (strpos($deskripsi_katalog, ".") !== false) {
+                            //     $str = str_replace('.', "<br>", $deskripsi_katalog);
+                            // }
+                            // $deskripsi_katalog = preg_replace("/(?<!\d)\:(?!\d)/", ":<br>", $deskripsi_katalog);
+                            // echo "Deskripsi Katalog: " . $deskripsi_katalog . "<br>";
                             $deskripsi_katalog = htmlspecialchars_decode($data['katalog']['deskripsi_katalog']);
-                            $deskripsi_katalog = str_replace("<br>", "<br>", $deskripsi_katalog);
-                            echo "Deskripsi Katalog: " . $deskripsi_katalog . "<br>";
+
+                            if (strpos($deskripsi_katalog, ".") !== false || strpos($deskripsi_katalog, ":") !== false) {
+                                $replacements = ['.' => '.<br>', ':' => ':<br>'];
+                                foreach ($replacements as $search => $replace) {
+                                    $deskripsi_katalog = str_replace($search, $replace, $deskripsi_katalog);
+                                }
+
+                                for ($i = 1; $i < 10; $i++) {
+                                    $deskripsi_katalog = str_replace($i . '.<br>', $i . '.', $deskripsi_katalog);
+                                }
+                            }
+
+                            echo $deskripsi_katalog;
+
                             ?>
+
                         </p>
                     </div>
                     <div class="harga">
-                        <h6>Harga : Rp. <?= number_format($data['katalog']['harga'], 0, ',', '.') ?></h6>
+                        <!-- <h6>Harga : Rp. <?= number_format($data['katalog']['harga'], 0, ',', '.') ?></h6> -->
                         <input type="hidden" name="harga" value="<?= $data['katalog']['harga'] ?>">
                     </div>
-                    <div class="stok">
+                    <!-- <div class="stok">
                         <h6>Stok : <?= $data['katalog']['stock'] ?></h6>
-                    </div>
+                    </div> -->
                     <div class="quantity">
                         <input id="stok" type="hidden" value="<?= $data['katalog']['stock'] ?>">
-                        <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                        <input type='text' name="jumlah" value='1' class='qty' readonly />
-                        <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                        <!-- <input type='button' value='-' class='qtyminus minus' field='quantity' /> -->
+                        <input type="hidden" name="total" value="<?= $data['katalog']['harga'] ?>">
+                            <input type="hidden" name="jumlah" value="1">
+                        <!-- <input type='button' value='+' class='qtyplus plus' field='quantity' /> -->
                     </div>
                     <div class="button">
-
                         <button>Masukan Keranjang</button>
                         <button type="submit">Beli Sekarang</button>
                     </div>
@@ -95,13 +116,29 @@ $this->view('templates/navbar', $data);
                         <form action="<?= BASEURL ?>Katalog/addTransaksiPaket" method="post">
                             <div class="header-paket">
                                 <h2 class="nama-paket"><?= $paket['nama_paket'] ?></h2>
-                                <input type="hidden" name="nama_paket" value="<?= $paket['nama_paket'] ?>">
+                                <!-- <input type="hidden" name="nama_paket" value="<?= $paket['nama_paket'] ?>"> -->
                             </div>
                             <div class="deskripsi-paket">
-                                <?= $paket['fitur'] ?>
+                                <?php
+                                $fitur = htmlspecialchars_decode($paket['fitur']);
+
+                                if (strpos($fitur, ".") !== false || strpos($fitur, ":") !== false) {
+                                    $replacements = ['.' => '.<br>', ':' => ':<br>'];
+                                    foreach ($replacements as $search => $replace) {
+                                        $fitur = str_replace($search, $replace, $fitur);
+                                    }
+
+                                    for ($i = 1; $i < 10; $i++) {
+                                        $fitur = str_replace($i . '.<br>', $i . '.', $fitur);
+                                    }
+                                }
+
+                                echo $fitur;
+                                ?>
                                 <br>
                                 <?= 'Harga : Rp.' . number_format($paket['harga_paket'], 0, ',', '.') ?>
-                                <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>">
+                                <!-- <input type="hidden" name="fitur" value="<?= $paket['fitur'] ?>"> -->
+                                <!-- <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>"> -->
                             </div>
 
                             <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
@@ -111,8 +148,8 @@ $this->view('templates/navbar', $data);
                             <input type="hidden" name="tgl_keluar_stock" value="<?= date('Y-m-d H:i:s') ?>">
                             <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
                             <input type="hidden" name="status_trx" value="1">
-                            <input type="hidden" name="total" value="0">
-                            <input type="hidden" name="jumlah" value="0">
+                            <input type="hidden" name="total" value="<?= $paket['harga_paket'] ?>">
+                            <input type="hidden" name="jumlah" value="1">
                             <br>
                             <button type="submit" class="btn-beli">Beli Paket</button>
                         </form>

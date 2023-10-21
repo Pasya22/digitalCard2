@@ -72,7 +72,7 @@ if (!$_SESSION["user_session"]) {
                         <?php
                         $i = 1;
 
-                        foreach ($data['trx'] as $item) {
+                        foreach ($data['trxs'] as $item) {
                             if ($item['paket_id'] != 0) {
                                 $item['nama_katalog'] = "none";
                             }
@@ -88,8 +88,8 @@ if (!$_SESSION["user_session"]) {
                                 <td><?= $item['kode_trx'] ?></td>
                                 <td><?= $item['nama_katalog'] ?></td>
                                 <td><?= $item['nama_paket'] ?></td>
+                                <td><?= 'Rp.' . number_format($item['total'], 0, ',', '.') ?></td>
                                 <td><?= $item['jumlah'] ?></td>
-                                <td><?= $item['total'] ?></td>
                                 <?php
                                 if ($item['status_trx'] == 1) {
                                     echo "<td>pending</td>";
@@ -106,12 +106,23 @@ if (!$_SESSION["user_session"]) {
                                     <a class="hapus" href="<?= BASEURL . 'Admin/deleteTrx/' . $item['trx_id'] ?>">Delete</a>
                                 </td>
                             </tr>
-                        <?php } ?>
-
-
-
+                        <?php } ?> 
 
                     </table>
+                    <div class="data">
+                        <?php if ($data['pagination']['currentPage'] >  $data['pagination']['totalPages']) : ?>
+                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . ($data['pagination']['currentPage'] - 1) ?>">Previous</a>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <=  $data['pagination']['totalPages']; $i++) : ?>
+                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . $i ?>" <?php if ($data['pagination']['currentPage'] == $i) echo 'class="active"' ?>><?= $i ?></a>
+                        <?php endfor; ?>
+
+                        <?php if ($data['pagination']['currentPage'] <  $data['pagination']['totalPages']) : ?>
+                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . ($data['pagination']['currentPage'] + 1) ?>">Next</a>
+                        <?php endif; ?>
+                    </div>
+
 
                 </div>
             </div>

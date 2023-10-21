@@ -34,13 +34,13 @@ if (!$_SESSION["user_session"]) {
                     <div class="container-form">
                         <label>Status:
                             <select id="paket" class="neon">
-                                <option value="all">All</option> 
+                                <option value="all">All</option>
                                 <option value="Paket Comunity">Paket Comunity</option>
                                 <option value="Paket Super">Paket Super</option>
                                 <option value="Paket Basic">Paket Basic </option>
                             </select>
                             <i class="icon-dropdown"></i>
-                        </label>  
+                        </label>
                         <label>Cari fitur:
                             <input type="text" id="fitur" class="neonIn" placeholder="Masukan kata Kunci">
                         </label>
@@ -79,7 +79,24 @@ if (!$_SESSION["user_session"]) {
                                 <!-- <td class="image-katalog"><img src="<?= BASEURL . 'assets/img/katalog/' . $item['nama_gambar'] ?>" alt="" style="width:50%; height:4pc; text-align:center;"></td> -->
                                 <td><?= $item['nama_paket'] ?></td>
                                 <td><?= $item['nama_kategori'] ?></td>
-                                <td><?= $item['fitur'] ?></td>
+                                <td style="text-align: left; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                                    <?php
+                                    $fitur = htmlspecialchars_decode($item['fitur']);
+
+                                    if (strpos($fitur, ".") !== false || strpos($fitur, ":") !== false) {
+                                        $replacements = ['.' => '.<br>', ':' => ':<br>'];
+                                        foreach ($replacements as $search => $replace) {
+                                            $fitur = str_replace($search, $replace, $fitur);
+                                        }
+
+                                        for ($m = 1; $m < 10; $m++) {
+                                            $fitur = str_replace($m . '.<br>', $m . '.', $fitur);
+                                        }
+                                    }
+
+                                    echo $fitur;
+                                    ?>
+                                </td>
                                 <td>
                                     <a class="ubah" href="<?= BASEURL . 'Admin/formEditPaket/' . $item['paket_id'] ?>">Edit</a>
                                     <a class="hapus" href="<?= BASEURL . 'Admin/deletePaket/' . $item['paket_id'] ?>">Delete</a>

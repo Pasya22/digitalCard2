@@ -52,29 +52,27 @@ class Katalog extends Controller
             exit();
         }
 
-        $Duser =  $_SESSION['user_session']['username'];
+        // $Duser =  $_SESSION['user_session']['username'];
 
 
 
-        $nama_katalog = $_POST['nama_katalog'];
-        $kode_trx = $_POST['kode_trx'];
-        $harga =  $_POST['harga'];
+        // $nama_katalog = $_POST['nama_katalog'];
+        // $kode_trx = $_POST['kode_trx'];
+        // $harga =  $_POST['harga'];
         // $non_paket =  $_POST['non_paket'];
-        $jumlah =  $_POST['jumlah'];
+        // $jumlah =  $_POST['jumlah'];
 
         // Menghitung total harga
-        $total_harga = $harga * $jumlah;
-        $totalNya =  $total_harga;
+        // $total_harga = $harga * $jumlah;
+        // $totalNya =  $total_harga;
 
         if ($this->model('admin_model')->tambahDataTrx($_POST) > 0) {
             Flasher::setFlash('', 'Transaksi', 'Berhasil ', 'success');
 
 
             // Bangun URL untuk pesan WhatsApp
-            $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" .
-                $Duser . "%0AKode%20Trx%20%3A" .  $kode_trx . "%0Anama%20katalog%20%3A" .
-                $nama_katalog . "%0Aharga%20%3A%20Rp." . number_format($harga, 0, ',', '.') . "%0AJumlah%20Trx%20%3A" .
-                $jumlah . "%3A%0ATotal%20Harga%3A%20Rp." . number_format($totalNya, 0, ',', '.');
+            $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" . 'Hallo Kak, Saya berminat membeli ini';
+
             header("Location: $whatsapp_url");
         } else {
             Flasher::setFlash('Transaksi', 'Gagal ', 'danger');
@@ -95,12 +93,20 @@ class Katalog extends Controller
         $Duser =  $_SESSION['user_session']['username'];
         $nama_paket = $_POST['nama_paket'];
         $harga_paket = 'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
+
+        $jumlah =  $_POST['jumlah'];
+        $fiturs =  $_POST['fitur'];
+
+        // Menghitung total harga 
+        $totalNya =  'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
+
+
         $kode_trx = $_POST['kode_trx'];
 
         // Tambahkan data transaksi ke database
         if ($this->model('admin_model')->tambahDataTrxPaket($_POST) > 0) {
             // Bangun URL untuk pesan WhatsApp
-            $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" . $Duser . "%0AKode%20Trx%20%3A" .  $kode_trx . "%0ANama%20Paket%20%3A" .  $nama_paket . "%0AHarga%20Paket%20%3A" .  $harga_paket;
+            $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" . 'Hallo Kak, Saya berminat membeli ini';
             // Redirect ke URL WhatsApp
             header("Location: $whatsapp_url");
         } else {

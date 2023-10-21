@@ -101,67 +101,7 @@ if (!$_SESSION["user_session"]) {
                         </tbody>
                     </table>
 
-                    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-                    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                    <script>
-                        $(document).ready(function() {
-                            $("#filterForm").submit(function(e) {
-                                e.preventDefault();
-                                var start_date = $("#tanggal_mulai").val();
-                                var end_date = $("#tanggal_selesai").val();
 
-                                $.ajax({
-                                    url: "<?= BASEURL . 'Admin/filterByTanggalKeluar'; ?>",
-                                    type: "POST",
-                                    data: {
-                                        start_date: start_date,
-                                        end_date: end_date
-                                    },
-                                    dataType: 'json',
-                                    success: function(data) {
-                                        $("#laporanBody").empty(); // Bersihkan isi tbody
-                                        $.each(data, function(i, item) {
-                                            var tgl_masuk = new Date(item.tgl_masuk_stock);
-                                            var tgl_keluar = new Date(item.tgl_keluar_stock);
-
-                                            var formattedTglMasuk = tgl_masuk.getDate() + '-' + (tgl_masuk.getMonth() + 1) + '-' + tgl_masuk.getFullYear();
-                                            var formattedTglKeluar = tgl_keluar.getDate() + '-' + (tgl_keluar.getMonth() + 1) + '-' + tgl_keluar.getFullYear();
-
-                                            var row = '<tr>';
-                                            row += '<td>' + item.kode_trx + '</td>';
-                                            row += '<td>' + formattedTglMasuk + '</td>';
-                                            row += '<td>' + formattedTglKeluar + '</td>';
-                                            row += '<td>' + item.jumlah + '</td>';
-                                            row += '<td>' + item.total + '</td>';
-                                            row += '<td>' + getStatusLabel(item.status_trx) + '</td>';
-                                            row += '</tr>';
-
-                                            $("#laporanBody").append(row); // Tambahkan baris ke tbody
-                                        });
-                                    },
-
-                                    error: function(error) {
-                                        console.log(error);
-                                    }
-                                });
-                            });
-
-                            function getStatusLabel(status_trx) {
-                                switch (status_trx) {
-                                    case 1:
-                                        return 'pending';
-                                    case 2:
-                                        return 'successful';
-                                    case 3:
-                                        return 'failed';
-                                    case 4:
-                                        return 'refund';
-                                    default:
-                                        return '';
-                                }
-                            }
-                        });
-                    </script> -->
                 </div>
             </div>
         </main>

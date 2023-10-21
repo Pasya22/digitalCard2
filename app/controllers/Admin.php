@@ -42,17 +42,49 @@ class Admin extends Controller
 
 
     // view data Transaksi ==========================================---------------------------////
-    public function DataTransaksi()
+    public function DataTransaksi($page = 1)
     {
+        $dataPerPage = 10; // Number of items per page
+        $offset = ($page - 1) * $dataPerPage;
+
         $data['judul'] = 'Data Transaksi';
-        $data['trx'] = $this->model('admin_model')->getALLTransaksiJoin();
+        $data['trx'] = $this->model('admin_model')->getALLTransaksiJoin2($dataPerPage, $offset);
+        $data['trxs'] = $this->model('admin_model')->getALLTransaksiJoin();
         $data['katalog'] = $this->model('admin_model')->getALLKatalog();
 
-        // echo json_encode($data);
+        // Get total number of items for pagination
+        $totalItems = count($this->model('admin_model')->getALLTransaksiJoin());
+
+        $data['pagination']['totalPages'] = $totalItems / $dataPerPage;
+       
+        $data['pagination']['currentPage'] = $page;
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/Data/DataTransaksi', $data);
         $this->view('admin/templates/footer');
     }
+    public function getTransactions()
+    {
+        $dataPerPage = $_POST['length']; // Number of items per page
+        $start = $_POST['start']; // Offset
+        $draw = $_POST['draw']; // Draw counter (used by DataTables)
+
+        // Fetch data from your model based on $dataPerPage and $start
+        $data['trx'] = $this->model('admin_model')->getALLTransaksiJoin2($dataPerPage, $start);
+
+        // Get total number of records (adjust this based on your actual data)
+        $totalRecords = $this->model('admin_model')->getALLTransaksiJoin();
+
+        $response = [
+            "draw" => intval($draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalRecords,
+            "data" => $data
+        ];
+
+        echo json_encode($response);
+    }
+
 
     public function filterByCategory()
     {

@@ -64,7 +64,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="deskripsi ">
                                 <label for="deskripsi">deskripsi</label>
                                 <span>:</span>
-                                <textarea id="editor" name="fitur" cols="30" rows="20"></textarea>
+                                <textarea class="deskrip" name="fitur" cols="30" rows="20"></textarea>
                             </div>
                             <div class="button-box">
                                 <button type="submit" name="submit">Simpan</button>

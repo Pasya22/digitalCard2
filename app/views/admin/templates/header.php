@@ -189,7 +189,7 @@
             margin-top: 12px;
             left: 0px;
             color: white;
-            margin-left: 27.5%;
+            margin-left: 26.5%;
             position: absolute;
             transition: transform 0.6s ease;
             /* Menambahkan transisi untuk transformasi */

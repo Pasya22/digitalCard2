@@ -264,6 +264,28 @@
         });
     });
 </script> -->
+<!-- <script>
+    $(document).ready(function() {
+        load_data();
+
+        function load_data(page) {
+            $.ajax({
+                url: "<?= BASEURL.'Admin/DataTransaksi'?>",
+                method: "POST",
+                data: {
+                    page: page
+                },
+                success: function(data) {
+                    $(".pagination").html(data)
+                }
+            })
+        }
+        $(document).on("click", '.pagination', function() {
+            var page = $(this).data("id");
+            load_data(page);
+        })
+    })
+</script> -->
 <script>
     $(document).ready(function() {
         $("#filterForm").submit(function(e) {
