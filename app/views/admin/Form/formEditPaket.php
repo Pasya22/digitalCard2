@@ -54,9 +54,9 @@ if (!$_SESSION["user_session"]) {
                             <div class="Kategori">
                                 <label for="Kategori">Kategori</label>
                                 <span>:</span>
-                                <select name="kategori_id" id="kategori_id">
-                                    <?php $data['kategoriId'] = $this->model('admin_model')->getALLKategoriById($data['paket']['kategori_id']); ?>
-                                    <option value="<?= $data['paket']['kategori_id'] ?>"><?= $data['kategoriId']['nama_kategori'] ?></option>
+                                <select name="id_kategori" id="id_kategori">
+                                    <?php $data['kategoriId'] = $this->model('admin_model')->getALLKategoriById($data['paket']['id_kategori']); ?>
+                                    <option value="<?= $data['paket']['id_kategori'] ?>"><?= $data['kategoriId']['nama_kategori'] ?></option>
                                     <?php foreach ($data['paketKate'] as $key) { ?>
                                         <option value="<?= $key['id_kategori'] ?>">
                                             <?= $key['nama_kategori'] ?></option>

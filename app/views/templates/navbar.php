@@ -32,12 +32,13 @@
                 <i class="fa-solid fa-cart-shopping"></i>
             </div>
             <div class="profile">
-                <a href="<?= BASEURL . 'auth/logout' ?>">
+                <a href="<?= BASEURL . 'Auth/logout' ?>">
                     Logout
                 </a>
                 <i class="fa-solid fa-circle-user"></i>
                 <p><?= $data['username'] ?></p>
             </div>
         </div>
+
     </div>
 </header>

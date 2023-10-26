@@ -102,8 +102,8 @@ if (!$_SESSION["user_session"]) {
                                     <td><?= $item['stock'] ?></td>
                                     <td><?= $item['sold'] ?></td>
                                     <td>
-                                        <a class="ubah" href="<?= BASEURL . 'Admin/formEditKatalog/' . $item['katalog_id'] ?>">Edit</a>
-                                        <a class="hapus" href="<?= BASEURL . 'Admin/deleteKatalog/' . $item['katalog_id'] ?>">Delete</a>
+                                        <a class="ubah" href="<?= BASEURL . 'Admin/formEditKatalog/' . $item['id_katalog'] ?>">Edit</a>
+                                        <a class="hapus" href="<?= BASEURL . 'Admin/deleteKatalog/' . $item['id_katalog'] ?>">Delete</a>
                                     </td>
                                 </tr>
 

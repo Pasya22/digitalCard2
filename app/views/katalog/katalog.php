@@ -37,7 +37,7 @@ $this->view('templates/navbar', $data);
                     <div class="contentCategory" id="content">
                         <?php foreach ($data['katalogId'] as $katalog) : ?>
                             <div class="product-1">
-                                <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['katalog_id'] ?>">
+                                <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['id_katalog'] ?>">
                                     <figure>
                                         <img src="<?= BASEURL ?>assets/img/katalog/<?= $katalog['nama_gambar'] ?>" alt=''>
                                     </figure>

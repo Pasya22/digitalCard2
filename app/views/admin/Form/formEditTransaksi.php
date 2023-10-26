@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="container-form">
-                        <form action="<?= BASEURL . 'Admin/editTrx/' . $data['trx']['trx_id'] ?>" method="POST">
-                            <input type="hidden" name="trx_id" value="<?= $data['trx']['trx_id'] ?>">
+                        <form action="<?= BASEURL . 'Admin/editTrx/' . $data['trx']['id_trx'] ?>" method="POST">
+                            <input type="hidden" name="id_trx" value="<?= $data['trx']['id_trx'] ?>">
 
                             <input name="kode_trx" id="kode_trx" type="hidden" value="<?= $data['trx']['kode_trx'] ?>">
 

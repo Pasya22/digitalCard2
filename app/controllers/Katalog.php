@@ -20,10 +20,11 @@ class Katalog extends Controller
         $data['judul'] = 'Detail Katalog';
         $data['kategori'] = $this->model('admin_model')->getALLKategori();
         $data['katalog'] = $this->model('admin_model')->getALLKatalogById($id);
-        $kategori_id = $data['katalog']['kategori_id'];
+        $id_kategori = $data['katalog']['id_kategori'];
 
         // Dapatkan paket berdasarkan kategori
-        $data['paket'] = $this->model('admin_model')->getPaketByKategoriId($kategori_id);
+        $data['paket'] = $this->model('admin_model')->getPaketByKategoriId($id_kategori);
+        $data['pakets'] = $this->model('admin_model')->getALLPaket();
 
         $data['trx'] = $this->model('admin_model')->getALLTransaksiById($id);
 
@@ -76,7 +77,7 @@ class Katalog extends Controller
             header("Location: $whatsapp_url");
         } else {
             Flasher::setFlash('Transaksi', 'Gagal ', 'danger');
-            header('Location: ' . BASEURL . 'Katalog/Detail');
+            header('Location: ' . BASEURL . 'Katalog/Detail/' .   $_POST['id_katalog']);
             exit;
         }
     }
@@ -90,20 +91,20 @@ class Katalog extends Controller
             exit();
         }
 
-        $Duser =  $_SESSION['user_session']['username'];
-        $nama_paket = $_POST['nama_paket'];
-        $harga_paket = 'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
+        // $Duser =  $_SESSION['user_session']['username'];
+        // $nama_paket = $_POST['nama_paket'];
+        // $harga_paket = 'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
 
-        $jumlah =  $_POST['jumlah'];
-        $fiturs =  $_POST['fitur'];
+        // $jumlah =  $_POST['jumlah'];
+        // $fiturs =  $_POST['fitur'];
 
-        // Menghitung total harga 
-        $totalNya =  'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
+        // // Menghitung total harga 
+        // $totalNya =  'Rp.' . number_format($_POST['harga_paket'], 0, ',', '.');
 
 
-        $kode_trx = $_POST['kode_trx'];
+        // $kode_trx = $_POST['kode_trx'];
 
-        // Tambahkan data transaksi ke database
+        // Tambahkan data transaksi ke database 
         if ($this->model('admin_model')->tambahDataTrxPaket($_POST) > 0) {
             // Bangun URL untuk pesan WhatsApp
             $whatsapp_url = "https://wa.me/6281252501275?text=Nama%3A%20" . 'Hallo Kak, Saya berminat membeli ini';
@@ -111,7 +112,7 @@ class Katalog extends Controller
             header("Location: $whatsapp_url");
         } else {
             Flasher::setFlash('Transaksi', 'Gagal ', 'danger');
-            header('Location: ' . BASEURL . 'Katalog/Detail');
+            header('Location: ' . BASEURL . 'Katalog/Detail/'. $_POST['id_katalog']);
             exit;
         }
     }

@@ -42,12 +42,12 @@ $this->view('templates/navbar', $data);
             <div class="secondary-box content-box">
 
                 <form action="<?= BASEURL ?>Katalog/addTransaksiUser" method="post">
-                    <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
-                    <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
+                    <input type="hidden" name="id_katalog" value="<?= $data['katalog']['id_katalog'] ?>">
+                    <input type="hidden" name="id_kategori" value="<?= $data['katalog']['id_kategori'] ?>">
                     <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                     <input type="hidden" name="tgl_keluar_stock" value="<?= date('Y-m-d H:i:s') ?>">
                     <!-- yang metode di ganti dulu paket ya -->
-                    <input type="hidden" name="paket_id" value="<?= $paket['paket']['paket_id'] ?>">
+                    <input type="hidden" name="paket_id" >
                     <input type="hidden" name="kode_trx" value="<?= $this->model('admin_model')->generateRandomCode() ?>">
                     <input type="hidden" name="status_trx" value="1">
 
@@ -141,8 +141,8 @@ $this->view('templates/navbar', $data);
                                 <!-- <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>"> -->
                             </div>
 
-                            <input type="hidden" name="katalog_id" value="<?= $data['katalog']['katalog_id'] ?>">
-                            <input type="hidden" name="kategori_id" value="<?= $data['katalog']['kategori_id'] ?>">
+                            <input type="hidden" name="id_katalog" value="<?= $data['katalog']['id_katalog'] ?>">
+                            <input type="hidden" name="id_kategori" value="<?= $data['katalog']['id_kategori'] ?>">
                             <input type="hidden" name="id_user" value="<?= $data['id_user'] ?>">
                             <input type="hidden" name="paket_id" value="<?= $paket['paket_id'] ?>">
                             <input type="hidden" name="tgl_keluar_stock" value="<?= date('Y-m-d H:i:s') ?>">
@@ -190,7 +190,7 @@ $this->view('templates/navbar', $data);
                     <div class="contentCategory" id="content">
                         <?php foreach ($katalogs as $katalog) : ?>
                             <div class="product-1">
-                                <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['katalog_id'] ?>">
+                                <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['id_katalog'] ?>">
                                     <figure>
                                         <img src="<?= BASEURL ?>assets/img/katalog/<?= $katalog['nama_gambar'] ?>" alt=''>
                                     </figure>

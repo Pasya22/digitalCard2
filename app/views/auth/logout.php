@@ -1,11 +1,12 @@
 <?php
 session_start();
-$_SESSION = [];
+// $_SESSION = [];
 session_unset();
 session_destroy();
 
 // setcookie('id', '', time() - 1);
 // setcookie('key', '', time() - 1);
 
-header('Location: ' . BASEURL . 'auth/login');
+header('Location: ' . BASEURL . 'Auth/login');
 exit;
+ 

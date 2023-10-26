@@ -108,7 +108,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="Category">
                                 <label for="Category">Category</label>
                                 <span>:</span>
-                                <select name="kategori_id" id="kategori_id" required>
+                                <select name="id_kategori" id="id_kategori" required>
                                     <option value="">-- Choices Category --</option>
                                     <?php foreach ($data['kat_show'] as $key) { ?>
                                         <option value="<?= $key['id_kategori'] ?>">

@@ -102,26 +102,14 @@ if (!$_SESSION["user_session"]) {
                                 }
                                 ?>
                                 <td>
-                                    <a class="ubah" href="<?= BASEURL . 'Admin/formEditTrx/' . $item['trx_id'] ?>">Edit</a>
-                                    <a class="hapus" href="<?= BASEURL . 'Admin/deleteTrx/' . $item['trx_id'] ?>">Delete</a>
+                                    <a class="ubah" href="<?= BASEURL . 'Admin/formEditTrx/' . $item['id_trx'] ?>">Edit</a>
+                                    <a class="hapus" href="<?= BASEURL . 'Admin/deleteTrx/' . $item['id_trx'] ?>">Delete</a>
                                 </td>
                             </tr>
                         <?php } ?> 
 
                     </table>
-                    <div class="data">
-                        <?php if ($data['pagination']['currentPage'] >  $data['pagination']['totalPages']) : ?>
-                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . ($data['pagination']['currentPage'] - 1) ?>">Previous</a>
-                        <?php endif; ?>
-
-                        <?php for ($i = 1; $i <=  $data['pagination']['totalPages']; $i++) : ?>
-                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . $i ?>" <?php if ($data['pagination']['currentPage'] == $i) echo 'class="active"' ?>><?= $i ?></a>
-                        <?php endfor; ?>
-
-                        <?php if ($data['pagination']['currentPage'] <  $data['pagination']['totalPages']) : ?>
-                            <a href="<?= BASEURL . 'Admin/DataTransaksi/' . ($data['pagination']['currentPage'] + 1) ?>">Next</a>
-                        <?php endif; ?>
-                    </div>
+                   
 
 
                 </div>

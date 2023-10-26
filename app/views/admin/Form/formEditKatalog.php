@@ -39,7 +39,7 @@ if (!$_SESSION["user_session"]) {
                     </div>
                     <div class="container-form">
                         <form action="<?= BASEURL . 'Admin/editKatalog' ?>" method="POST" enctype='multipart/form-data'>
-                            <input name="katalog_id" id="katalog_id" type="hidden" value="<?= $data['catalog']['katalog_id'] ?>">
+                            <input name="id_katalog" id="id_katalog" type="hidden" value="<?= $data['catalog']['id_katalog'] ?>">
                             <input name="gambar_lama" type="hidden" value="<?= $data['catalog']['nama_gambar'] ?>">
                             <input name="gambar_lama2" type="hidden" value="<?= $data['catalog']['nama_gambar2'] ?>">
                             <input name="gambar_lama3" type="hidden" value="<?= $data['catalog']['nama_gambar3'] ?>">
@@ -149,9 +149,9 @@ if (!$_SESSION["user_session"]) {
                             <div class="Kategori">
                                 <label for="Kategori">Kategori</label>
                                 <span>:</span>
-                                <select name="kategori_id" id="kategori_id" required>
-                                    <?php $data['kategoriId'] = $this->model('admin_model')->getALLKategoriById($data['catalog']['kategori_id']); ?>
-                                    <option value="<?= $data['catalog']['kategori_id'] ?>"><?= $data['kategoriId']['nama_kategori'] ?></option>
+                                <select name="id_kategori" id="id_kategori" required>
+                                    <?php $data['kategoriId'] = $this->model('admin_model')->getALLKategoriById($data['catalog']['id_kategori']); ?>
+                                    <option value="<?= $data['catalog']['id_kategori'] ?>"><?= $data['kategoriId']['nama_kategori'] ?></option>
                                     <?php foreach ($data['catalog2'] as $key) { ?>
                                         <option value="<?= $key['id_kategori'] ?>">
                                             <?= $key['nama_kategori'] ?></option>

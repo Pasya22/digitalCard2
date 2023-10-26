@@ -255,7 +255,7 @@ class Admin extends Controller
             exit;
         } else {
             Flasher::setFlash('Meng-Edit Data Katalog', 'Gagal ', 'danger');
-            header('Location: ' . BASEURL . 'Admin/formEditKatalog/' . $_POST['katalog_id']);
+            header('Location: ' . BASEURL . 'Admin/formEditKatalog/' . $_POST['id_katalog']);
             exit;
         }
     }
@@ -315,7 +315,7 @@ class Admin extends Controller
             exit;
         } else {
             Flasher::setFlash('Meng-Edit Data Katalog', 'Gagal ', 'danger');
-            header('Location: ' . BASEURL . 'Admin/formEditTransaksi/' . $_POST['trx_id']);
+            header('Location: ' . BASEURL . 'Admin/formEditTransaksi/' . $_POST['id_trx']);
             exit;
         }
     }

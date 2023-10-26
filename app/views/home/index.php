@@ -78,7 +78,7 @@ $this->view('templates/navbar', $data);
                         <?php foreach ($data['katalogId'] as $katalog) : ?>
                             <div class="product-1">
                                 <figure>
-                                    <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['katalog_id'] ?>">
+                                    <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['id_katalog'] ?>">
                                         <img src="<?= BASEURL ?>assets/img/katalog/<?= $katalog['nama_gambar'] ?>" alt=''>
                                     </a>
                                 </figure>
