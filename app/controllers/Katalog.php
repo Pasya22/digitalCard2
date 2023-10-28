@@ -10,21 +10,29 @@ class Katalog extends Controller
         $username = $this->model('auth_model')->getLoggedInUsername();
         $data['username'] = $username;
 
+        // Tambahkan baris berikut untuk mendapatkan $activeSubKategoriId
+
+
         $this->view('templates/header', $data);
         $this->view('katalog/katalog', $data);
         $this->view('templates/footer');
     }
 
+
     public function detail($id)
     {
         $data['judul'] = 'Detail Katalog';
-        $data['kategori'] = $this->model('admin_model')->getALLKategori();
-        $data['katalog'] = $this->model('admin_model')->getALLKatalogById($id);
-        $id_kategori = $data['katalog']['id_kategori'];
 
-        // Dapatkan paket berdasarkan kategori
-        $data['paket'] = $this->model('admin_model')->getPaketByKategoriId($id_kategori);
-        $data['pakets'] = $this->model('admin_model')->getALLPaket();
+        $data['kategori'] = $this->model('admin_model')->getALLKategoriById2($id);
+        $data['katalog'] = $this->model('admin_model')->getALLKatalogById($id);
+        // $id_sub_kategori = $data['katalog']['id_sub_kategori'];
+        // $data['sub_kategori'] = $this->model('admin_model')->getALLSubKategoriById($id_sub_kategori);
+        $data['kategori'] = $this->model('admin_model')->getALLKategori();
+        // var_dump($data['katalog'],$id,); die;
+
+        // // Dapatkan paket berdasarkan kategori
+        // $data['paket'] = $this->model('admin_model')->getPaketByKategoriId($id_sub_kategori);
+        // $data['pakets'] = $this->model('admin_model')->getALLPaket();
 
         $data['trx'] = $this->model('admin_model')->getALLTransaksiById($id);
 
@@ -39,6 +47,45 @@ class Katalog extends Controller
         $this->view('katalog/detail', $data);
         $this->view('templates/footer');
     }
+
+    public function detail2($subKategoriId)
+    {
+        $activeSubKategoriId = $subKategoriId;
+        $data['activeSubKategoriId'] = $activeSubKategoriId;
+        $data['judul'] =   'Detail Katalog';
+        $data['kategori'] = $this->model('admin_model')->getALLKategoriById2($subKategoriId);
+        $data['sub_kategori'] = $this->model('admin_model')->getALLSubKategoriById($subKategoriId);
+        $data['katalog'] = $this->model('admin_model')->getALLKatalogById($subKategoriId);
+        // var_dump($data['sub_kategori']);
+        // die;
+        // $data[]=   'Detail Katalog';
+        $id_user = $this->model('auth_model')->getLoggedInUserId();
+        $data['id_user'] = $id_user;
+
+        $username = $this->model('auth_model')->getLoggedInUsername();
+        $data['username'] = $username;
+        $this->view('templates/header', $data);
+        $this->view('katalog/detail2', $data);
+        $this->view('templates/footer');
+    }
+
+    public function getKatalogBySubKategori($subKategoriId)
+    {
+        $katalog = $this->model('admin_model')->getALLKatalogSubategoriById($subKategoriId);
+
+        $html = '';
+        foreach ($katalog as $item) {
+            $html .= '<div class="product-1">';
+            $html .= '<a href="' . BASEURL . 'Katalog/detail/' . $item['id_katalog'] . '">';
+            $html .= '<figure><img src="' . BASEURL . 'assets/img/katalog/' . $item['nama_gambar'] . '" alt=""></figure>';
+            $html .= '<div class="deskripsi"><h5>' . $item['nama_katalog'] . '</h5></div>';
+            $html .= '</a></div>';
+        }
+ 
+        echo $html;
+    }
+
+
 
     // Gunakan fungsi generateRandomCode untuk mendapatkan kode transaksi acak
 
@@ -112,7 +159,7 @@ class Katalog extends Controller
             header("Location: $whatsapp_url");
         } else {
             Flasher::setFlash('Transaksi', 'Gagal ', 'danger');
-            header('Location: ' . BASEURL . 'Katalog/Detail/'. $_POST['id_katalog']);
+            header('Location: ' . BASEURL . 'Katalog/Detail/' . $_POST['id_katalog']);
             exit;
         }
     }

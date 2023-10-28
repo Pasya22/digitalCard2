@@ -32,7 +32,7 @@
                     </div>
                     <div class="container-form">
                         <form action="<?= BASEURL . 'Admin/editTrx/' . $data['trx']['id_trx'] ?>" method="POST">
-                            <input type="hidden" name="id_trx" value="<?= $data['trx']['id_trx'] ?>">
+                            <input type="hidden" name="id_trx" value="<?= $data['trx']['id_trx'] ?>"> 
 
                             <input name="kode_trx" id="kode_trx" type="hidden" value="<?= $data['trx']['kode_trx'] ?>">
 
@@ -40,7 +40,9 @@
 
                             <input name="paket_id" id="paket_id" type="hidden" value="<?= $data['trx']['paket_id'] ?>">
 
-                            <input name="katalog_id" id="katalog_id" type="hidden" value="<?= $data['trx']['katalog_id'] ?>">
+                            <input name="id_katalog" id="id_katalog" type="hidden" value="<?= $data['trx']['id_katalog'] ?>">
+                            <input name="id_kategori" id="id_kategori" type="hidden" value="<?= $data['trx']['id_kategori'] ?>">
+                            <!-- <input name="id_sub_kategori" id="id_sub_kategori" type="hidden" value="<?= $data['trx']['id_sub_kategori'] ?>"> -->
 
                             <input name="total" id="total" type="hidden" value="<?= $data['trx']['total'] ?>">
 

@@ -10,6 +10,7 @@ class Home extends Controller
         // $data['alluser'] = $this->model('User_model')->getALLUser();
         // $data['allkecamatan'] = $this->model('Wilayah_model')->getALLKecamatan();
         $data['kategori'] = $this->model('admin_model')->getALLKategori();
+        $data['su_kate'] = $this->model('admin_model')->getALLSubKategori();
         $data['katalog'] = $this->model('admin_model')->getALLKatalog();
         $data['produk1'] = $this->model('admin_model')->getALLKatalogById(8);
         $data['produk2'] = $this->model('admin_model')->getALLKatalogById(15);

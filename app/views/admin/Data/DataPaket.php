@@ -62,7 +62,7 @@ if (!$_SESSION["user_session"]) {
                         <tr>
                             <th>No</th>
                             <th>Nama Paket</th>
-                            <th>Nama kategori</th>
+                            <th>Nama Sub Kategori</th>
                             <th>Fitur</th>
                             <th>Aksi</th>
                         </tr>
@@ -98,8 +98,8 @@ if (!$_SESSION["user_session"]) {
                                     ?>
                                 </td>
                                 <td>
-                                    <a class="ubah" href="<?= BASEURL . 'Admin/formEditPaket/' . $item['paket_id'] ?>">Edit</a>
-                                    <a class="hapus" href="<?= BASEURL . 'Admin/deletePaket/' . $item['paket_id'] ?>">Delete</a>
+                                    <a class="ubah" href="<?= BASEURL . 'Admin/formEditPaket/' . $item['id_paket'] ?>">Edit</a>
+                                    <a class="hapus" href="<?= BASEURL . 'Admin/deletePaket/' . $item['id_paket'] ?>">Delete</a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -73,10 +73,10 @@ if (!$_SESSION["user_session"]) {
                         $i = 1;
 
                         foreach ($data['trxs'] as $item) {
-                            if ($item['paket_id'] != 0) {
+                            if ($item['id_paket'] != 0) {
                                 $item['nama_katalog'] = "none";
                             }
-                            if ($item['paket_id'] == 0) {
+                            if ($item['id_paket'] == 0) {
                                 $item['nama_paket'] = "none";
                             }
                         ?>

@@ -64,31 +64,29 @@ $this->view('templates/navbar', $data);
                         <ul class="splide__list">
                             <?php foreach ($data['kategori'] as $kategori) : ?>
                                 <li class="splide__slide">
-                                    <button class="button-cat"><?= $kategori['nama_kategori'] ?></button>
+                                    <a class="button-cat" style="cursor: pointer;" href="<?= BASEURL . 'Katalog/detail2/' . $kategori['id_kategori'] ?>"><?= $kategori['nama_kategori'] ?></a>
                                 </li>
-                            <?php endforeach ?>
+                            <?php endforeach; ?>
                         </ul>
+                        <div class="button-box">
+                            <ul>
+                                <?php foreach ($data['su_kate'] as $kategori) : ?>
+                                    <?php if ($kategori['id_kategori'] == 1) : ?>
+                                        <li>
+                                            <button class="button-cat" data-subkategoriid="<?= $kategori['id_sub_kategori'] ?>" onclick="redirectToDetail2(<?= $kategori['id_kategori'] ?>)">
+                                                <?= $kategori['nama_sub_kategori'] ?>
+                                            </button>
+                                        </li>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="content-box">
-                <?php foreach ($data['kategori'] as $kategori) : ?>
-                    <?php $data['katalogId'] = $this->model('admin_model')->getKategoriByIdM8($kategori['id_kategori']); ?>
-                    <div class="contentCategory" id="content">
-                        <?php foreach ($data['katalogId'] as $katalog) : ?>
-                            <div class="product-1">
-                                <figure>
-                                    <a href="<?= BASEURL . 'Katalog/detail/' . $katalog['id_katalog'] ?>">
-                                        <img src="<?= BASEURL ?>assets/img/katalog/<?= $katalog['nama_gambar'] ?>" alt=''>
-                                    </a>
-                                </figure>
-                                <div class="deskripsi">
-                                    <h5><?= $katalog['nama_katalog'] ?></h5>
-                                </div>
-                            </div>
-                        <?php endforeach ?>
-                    </div>
-                <?php endforeach ?>
+                <!-- Content box content goes here -->
             </div>
 
         </div>
@@ -153,6 +151,29 @@ $this->view('templates/navbar', $data);
     </div>
     </div>
 </main>
+<script>
+    function redirectToDetail2(subKategoriId) {
+        localStorage.setItem('activeSubKategoriId', subKategoriId);
+        var url = "<?= BASEURL . 'Katalog/detail2/' ?>";
+        window.location.href = url + subKategoriId;
+    }
+
+    var buttons = document.querySelectorAll('.button-cat');
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            var activeSubKategoriId = this.dataset.subkategoriid;
+
+            buttons.forEach(function(button) {
+                button.classList.remove('active');
+            });
+
+            this.classList.add('active');
+
+            localStorage.setItem('activeSubKategoriId', activeSubKategoriId);
+        });
+    }
+</script>
 <?php
 $this->view('templates/footer1', $data);
 ?>

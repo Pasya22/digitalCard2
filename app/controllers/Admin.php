@@ -56,7 +56,7 @@ class Admin extends Controller
         $totalItems = count($this->model('admin_model')->getALLTransaksiJoin());
 
         $data['pagination']['totalPages'] = $totalItems / $dataPerPage;
-       
+
         $data['pagination']['currentPage'] = $page;
 
         $this->view('admin/templates/header', $data);
@@ -220,6 +220,7 @@ class Admin extends Controller
     {
         $data['judul'] = 'AddKatalog';
         $data['kat_show'] = $this->model('admin_model')->getALLKategori();
+        $data['subKate'] = $this->model('admin_model')->getALLSubKategori();
         $this->view('admin/templates/header', $data);
         $this->view('admin/form/formAddKatalog', $data);
         $this->view('admin/templates/footer');
@@ -236,12 +237,28 @@ class Admin extends Controller
             exit;
         }
     }
+    public function getSubKategori()
+    {
+        $id_kategori = $_POST['id_kategori']; // Perbaiki bagian ini
+
+        // Selanjutnya, Anda dapat melanjutkan dengan kode yang sama seperti sebelumnya
+        $sub_kategori = $this->model('admin_model')->getALLSubKategoriById($id_kategori);
+
+        $options = '<option value="">-- pilih sub kategori --</option>';
+        foreach ($sub_kategori as $subkategori) {
+            $options .= '<option value="' . $subkategori['id_sub_kategori'] . '">' . $subkategori['nama_sub_kategori'] . '</option>';
+        }
+
+        echo $options;
+    }
+
 
     public function formEditKatalog($id)
     {
         $data['judul'] = 'EditKatalog';
         $data['catalog'] = $this->model('admin_model')->getALLKatalogById($id);
         $data['catalog2'] = $this->model('admin_model')->getALLKategori();
+        $data['subKate'] = $this->model('admin_model')->getALLSubKategori();
         $this->view('admin/templates/header', $data);
         $this->view('admin/form/formEditKatalog', $data);
         $this->view('admin/templates/footer');

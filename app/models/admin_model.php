@@ -195,7 +195,7 @@ class admin_model extends Controller
 
         $query = "INSERT INTO catalog
                                 VALUES
-                                ('', :tgl_masuk_stock, :nama_katalog, :deskripsi_katalog, :nama_gambar,:nama_gambar2,:nama_gambar3,:nama_gambar4,:nama_gambar5,:id_kategori, :harga, :stock ,:sold)";
+                                ('', :tgl_masuk_stock, :nama_katalog, :deskripsi_katalog, :nama_gambar,:nama_gambar2,:nama_gambar3,:nama_gambar4,:nama_gambar5,:id_kategori, :id_sub_kategori, :harga, :stock ,:sold)";
 
         $this->db->query($query);
         $this->db->bind('tgl_masuk_stock', $data['tgl_masuk_stock']);
@@ -211,6 +211,7 @@ class admin_model extends Controller
         $this->db->bind('nama_gambar4', $gambar4);
         $this->db->bind('nama_gambar5', $gambar5);
         $this->db->bind('id_kategori', $data['id_kategori']);
+        $this->db->bind('id_sub_kategori', $data['id_sub_kategori']);
         $this->db->bind('harga', $data['harga']);
         $this->db->bind('stock', $data['stock']);
         $this->db->bind('sold', $data['sold']);
@@ -321,7 +322,7 @@ class admin_model extends Controller
     //     $this->db->query('SELECT transaksi.*,catalog.nama_katalog,login.username,paket.nama_paket
     //                      FROM transaksi
     //                      JOIN login ON transaksi.id_user = login.id_user  
-    //                      LEFT JOIN paket ON transaksi.paket_id = paket.paket_id  
+    //                      LEFT JOIN paket ON transaksi.id_paket = paket.id_paket  
     //                      JOIN catalog ON transaksi.id_katalog = catalog.id_katalog
     //                      ORDER BY transaksi.id_trx DESC');
     //     return $this->db->resultSet();
@@ -332,7 +333,7 @@ class admin_model extends Controller
         $this->db->query('SELECT transaksi.*, catalog.nama_katalog, login.username, paket.*
                      FROM transaksi
                      JOIN login ON transaksi.id_user = login.id_user  
-                     LEFT JOIN paket ON transaksi.paket_id = paket.paket_id  
+                     LEFT JOIN paket ON transaksi.id_paket = paket.id_paket  
                      JOIN catalog ON transaksi.id_katalog = catalog.id_katalog
                      ORDER BY transaksi.id_trx DESC');
 
@@ -343,7 +344,7 @@ class admin_model extends Controller
         $this->db->query('SELECT transaksi.*, catalog.nama_katalog, login.username, paket.*
                          FROM transaksi
                          JOIN login ON transaksi.id_user = login.id_user  
-                         LEFT JOIN paket ON transaksi.paket_id = paket.paket_id  
+                         LEFT JOIN paket ON transaksi.id_paket = paket.id_paket  
                          JOIN catalog ON transaksi.id_katalog = catalog.id_katalog
                          ORDER BY transaksi.id_trx DESC
                          LIMIT :offset, :limit');
@@ -358,7 +359,7 @@ class admin_model extends Controller
         $this->db->query('SELECT transaksi.*,catalog.nama_katalog,login.username,paket.nama_paket
                          FROM transaksi
                          JOIN login ON transaksi.id_user = login.id_user  
-                         LEFT JOIN paket ON transaksi.paket_id = paket.paket_id  
+                         LEFT JOIN paket ON transaksi.id_paket = paket.id_paket  
                          JOIN catalog ON transaksi.id_katalog = catalog.id_katalog
                          WHERE id_trx = :id_trx
                          ORDER BY id_trx DESC');
@@ -412,8 +413,8 @@ class admin_model extends Controller
 
         // $total = $harga * $data['jumlah'];
 
-        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, id_katalog, id_kategori, paket_id, total, jumlah, status_trx)
-              VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :id_katalog, :id_kategori, :paket_id, :total, :jumlah, :status_trx)";
+        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, id_katalog, id_kategori, id_paket, total, jumlah, status_trx)
+              VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :id_katalog, :id_kategori, :id_paket, :total, :jumlah, :status_trx)";
 
         $tgl_keluar_stock = date('Y-m-d H:i:s');
 
@@ -423,7 +424,7 @@ class admin_model extends Controller
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('id_katalog', $data['id_katalog']);
         $this->db->bind('id_kategori', $data['id_kategori']);
-        $this->db->bind('paket_id', $data['paket_id']);
+        $this->db->bind('id_paket', $data['id_paket']);
         $this->db->bind('total', $data['total']);
         $this->db->bind('jumlah', $data['jumlah']);
         $this->db->bind('status_trx', $data['status_trx']);
@@ -439,8 +440,8 @@ class admin_model extends Controller
     {
         // var_dump($data);
         // die;
-        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, id_katalog, id_kategori, paket_id, total, jumlah, status_trx)
-                  VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :id_katalog, :id_kategori, :paket_id, :total, :jumlah, :status_trx)";
+        $query = "INSERT INTO transaksi (tgl_keluar_stock, kode_trx, id_user, id_katalog, id_kategori, id_paket, total, jumlah, status_trx)
+                  VALUES (:tgl_keluar_stock, :kode_trx, :id_user, :id_katalog, :id_kategori, :id_paket, :total, :jumlah, :status_trx)";
 
         // Mendapatkan tanggal dan waktu saat ini
         $tgl_keluar_stock = date('Y-m-d H:i:s');
@@ -450,7 +451,7 @@ class admin_model extends Controller
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('id_katalog', $data['id_katalog']);
         $this->db->bind('id_kategori', $data['id_kategori']);
-        $this->db->bind('paket_id', $data['paket_id']);
+        $this->db->bind('id_paket', $data['id_paket']);
         $this->db->bind('total', $data['total']);
         $this->db->bind('jumlah', $data['jumlah']);
         $this->db->bind('status_trx', $data['status_trx']);
@@ -479,7 +480,9 @@ class admin_model extends Controller
                     kode_trx = :kode_trx,
                     id_user = :id_user,
                     id_katalog = :id_katalog,
-                    paket_id = :paket_id,
+                    id_kategori = :id_kategori,
+                    -- id_sub_kategori = :id_sub_kategori,
+                    id_paket = :id_paket,
                     total = :total,
                     jumlah = :jumlah,
                     status_trx = :status_trx
@@ -490,9 +493,11 @@ class admin_model extends Controller
         $this->db->query($query);
 
         $this->db->bind('id_katalog', $data['id_katalog']);
+        $this->db->bind('id_kategori', $data['id_kategori']);
+        // $this->db->bind('id_sub_kategori', $data['id_sub_kategori']);
         $this->db->bind('id_user', $data['id_user']);
         $this->db->bind('kode_trx', $data['kode_trx']);
-        $this->db->bind('paket_id', $data['paket_id']);
+        $this->db->bind('id_paket', $data['id_paket']);
         $this->db->bind('total', $data['total']);
         $this->db->bind('jumlah', $data['jumlah']);
         $this->db->bind('status_trx', $data['status_trx']);
@@ -525,13 +530,30 @@ class admin_model extends Controller
         $this->db->query('SELECT * FROM ' . $this->table4 . ' ORDER BY id_kategori ASC');
         return $this->db->resultSet();
     }
-
+    public function getALLSubKategori()
+    {
+        $this->db->query('SELECT * FROM sub_kategori');
+        return $this->db->resultSet();
+    }
 
     public function getALLKategoriById($id)
     {
         $this->db->query('SELECT * FROM ' . $this->table4 . ' WHERE id_kategori = :id_kategori ORDER BY id_kategori DESC ');
         $this->db->bind('id_kategori', $id);
         return $this->db->single();
+    }
+    public function getALLKategoriById2($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table4 . ' WHERE id_kategori = :id_kategori ORDER BY id_kategori DESC ');
+        $this->db->bind('id_kategori', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getALLSubKategoriById($id)
+    {
+        $this->db->query('SELECT * FROM sub_kategori WHERE id_kategori = :id_kategori ORDER BY id_kategori DESC ');
+        $this->db->bind('id_kategori', $id);
+        return $this->db->resultSet();
     }
 
     public function getKategoriByIdM8($id)
@@ -547,7 +569,19 @@ class admin_model extends Controller
         $this->db->bind('id_kategori', $id);
         return $this->db->resultSet();
     }
+    public function getALLKatalogSubategoriById($id)
+    {
+        $this->db->query('SELECT * FROM catalog WHERE id_sub_kategori = :id_sub_kategori ORDER BY id_katalog DESC');
+        $this->db->bind('id_sub_kategori', $id);
+        return $this->db->resultSet();
+    }
     public function getPaketByKategoriId($id)
+    {
+        $this->db->query('SELECT * FROM paket WHERE id_kategori = :id_kategori');
+        $this->db->bind('id_kategori', $id);
+        return $this->db->resultSet();
+    }
+    public function getPaketBySubKategoriId($id)
     {
         $this->db->query('SELECT * FROM paket WHERE id_kategori = :id_kategori');
         $this->db->bind('id_kategori', $id);
@@ -558,13 +592,13 @@ class admin_model extends Controller
     // GET DATA PAKET ================================================-----------------///
     public function getALLPaket()
     {
-        $this->db->query('SELECT * FROM ' . $this->table5 . ' ORDER BY paket_id DESC');
+        $this->db->query('SELECT * FROM ' . $this->table5 . ' ORDER BY id_paket DESC');
         return $this->db->resultSet();
     }
     public function getALLPaketById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table5 . ' WHERE paket_id = :paket_id ORDER BY paket_id DESC ');
-        $this->db->bind('paket_id', $id);
+        $this->db->query('SELECT * FROM ' . $this->table5 . ' WHERE id_paket = :id_paket ORDER BY id_paket DESC ');
+        $this->db->bind('id_paket', $id);
         return $this->db->single();
     }
     public function getALLPaketJoinById($id)
@@ -584,7 +618,7 @@ class admin_model extends Controller
         $this->db->query('SELECT paket.*,kategori.nama_kategori
                          FROM paket
                          JOIN kategori ON paket.id_kategori = kategori.id_kategori
-                         ORDER BY paket.paket_id DESC');
+                         ORDER BY paket.id_paket DESC');
         return $this->db->resultSet();
     }
     public function getPaketKatalogKategoriById($id)
@@ -629,7 +663,7 @@ class admin_model extends Controller
                     nama_paket = :nama_paket,  
                     harga_paket = :harga_paket, 
                     fitur = :fitur
-                    WHERE paket_id = :paket_id";
+                    WHERE id_paket = :id_paket";
         // var_dump($data);
         // die;
 
@@ -639,7 +673,7 @@ class admin_model extends Controller
         $this->db->bind('nama_paket', $data['nama_paket']);
         $this->db->bind('harga_paket', $data['harga_paket']);
         $this->db->bind('fitur',  $data['fitur']);
-        $this->db->bind('paket_id', $data['paket_id']);
+        $this->db->bind('id_paket', $data['id_paket']);
 
         $this->db->execute();
         return $this->db->rowCount();
@@ -650,9 +684,9 @@ class admin_model extends Controller
     // Delete Data Paket=========================--------------------------///
     public function PaketDelete($id)
     {
-        $query = "DELETE FROM paket WHERE paket_id = :paket_id";
+        $query = "DELETE FROM paket WHERE id_paket = :id_paket";
         $this->db->query($query);
-        $this->db->bind('paket_id', $id);
+        $this->db->bind('id_paket', $id);
         $this->db->execute();
         return $this->db->rowCount();
     }

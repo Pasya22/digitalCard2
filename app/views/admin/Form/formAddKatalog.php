@@ -106,14 +106,21 @@ if (!$_SESSION["user_session"]) {
                                 <input name="sold" id="terjual" type="text" placeholder="Masukan terjual" value="0" readonly>
                             </div>
                             <div class="Category">
-                                <label for="Category">Category</label>
+                                <label for="Category">Nama kategori</label>
                                 <span>:</span>
                                 <select name="id_kategori" id="id_kategori" required>
-                                    <option value="">-- Choices Category --</option>
+                                    <option value="">-- pilih kategori --</option>
                                     <?php foreach ($data['kat_show'] as $key) { ?>
                                         <option value="<?= $key['id_kategori'] ?>">
                                             <?= $key['nama_kategori'] ?></option>
                                     <?php } ?>
+                                </select>
+                            </div>
+                            <div class="sub-category">
+                                <label for="sub_kategori">Sub Kategori</label>
+                                <span>:</span>
+                                <select name="id_sub_kategori" id="id_sub_kategori" required>
+                                    <option value="">-- pilih sub kategori --</option>
                                 </select>
                             </div>
                             <div class="deskripsi">
@@ -132,3 +139,23 @@ if (!$_SESSION["user_session"]) {
         <footer></footer>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_kategori').on('change', function() {
+            var id_kategori = $(this).val();
+            if (id_kategori) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= BASEURL ?>Admin/getSubKategori', // Tentukan URL yang akan digunakan untuk mengambil sub kategori
+                    data: 'id_kategori=' + id_kategori,
+                    success: function(html) {
+                        $('#id_sub_kategori').html(html);
+                    }
+                });
+            } else {
+                $('#id_sub_kategori').html('<option value="">-- pilih sub kategori --</option>');
+            }
+        });
+    });
+</script>

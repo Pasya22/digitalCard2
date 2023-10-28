@@ -43,7 +43,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="nama katalog">
                                 <label for="nama katalog">nama paket</label>
                                 <span>:</span>
-                                <input name="paket_id" id="nama katalog" type="hidden" placeholder="Masukan nama paket" value="<?= $data['paket']['paket_id'] ?>">
+                                <input name="id_paket" id="nama katalog" type="hidden" placeholder="Masukan nama paket" value="<?= $data['paket']['id_paket'] ?>">
                                 <input name="nama_paket" id="nama katalog" type="text" placeholder="Masukan nama paket" value="<?= $data['paket']['nama_paket'] ?>" >
                             </div>
                             <div class="nama katalog">

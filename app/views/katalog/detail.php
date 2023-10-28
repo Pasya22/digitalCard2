@@ -58,14 +58,7 @@ $this->view('templates/navbar', $data);
                     <div class="deskripsi">
                         <p style="text-align: justify;">
                             <?php
-                            // $deskripsi_katalog = htmlspecialchars_decode($data['katalog']['deskripsi_katalog']);
-                            // $deskripsi_katalog = str_replace(".", "<br>", $deskripsi_katalog);
-
-                            // if (strpos($deskripsi_katalog, ".") !== false) {
-                            //     $str = str_replace('.', "<br>", $deskripsi_katalog);
-                            // }
-                            // $deskripsi_katalog = preg_replace("/(?<!\d)\:(?!\d)/", ":<br>", $deskripsi_katalog);
-                            // echo "Deskripsi Katalog: " . $deskripsi_katalog . "<br>";
+                          
                             $deskripsi_katalog = htmlspecialchars_decode($data['katalog']['deskripsi_katalog']);
 
                             if (strpos($deskripsi_katalog, ".") !== false || strpos($deskripsi_katalog, ":") !== false) {
@@ -110,13 +103,13 @@ $this->view('templates/navbar', $data);
         <div class="content-paket">
 
 
-            <?php foreach ($data['paket']  as $paket) : ?>
+            <!-- <?php foreach ($data['paket']  as $paket) : ?> -->
                 <div class="container-paket">
-                    <div class="card-paket">
+                    <!-- <div class="card-paket">
                         <form action="<?= BASEURL ?>Katalog/addTransaksiPaket" method="post">
                             <div class="header-paket">
                                 <h2 class="nama-paket"><?= $paket['nama_paket'] ?></h2>
-                                <!-- <input type="hidden" name="nama_paket" value="<?= $paket['nama_paket'] ?>"> -->
+                                <input type="hidden" name="nama_paket" value="<?= $paket['nama_paket'] ?>">
                             </div>
                             <div class="deskripsi-paket">
                                 <?php
@@ -137,8 +130,8 @@ $this->view('templates/navbar', $data);
                                 ?>
                                 <br>
                                 <?= 'Harga : Rp.' . number_format($paket['harga_paket'], 0, ',', '.') ?>
-                                <!-- <input type="hidden" name="fitur" value="<?= $paket['fitur'] ?>"> -->
-                                <!-- <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>"> -->
+                                <input type="hidden" name="fitur" value="<?= $paket['fitur'] ?>">
+                                <input type="hidden" name="harga_paket" value="<?= $paket['harga_paket'] ?>">
                             </div>
 
                             <input type="hidden" name="id_katalog" value="<?= $data['katalog']['id_katalog'] ?>">
@@ -153,9 +146,9 @@ $this->view('templates/navbar', $data);
                             <br>
                             <button type="submit" class="btn-beli">Beli Paket</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
-            <?php endforeach ?>
+            <!-- <?php endforeach ?> -->
         </div>
         <div class="container-produk-category">
             <div class="header">
@@ -167,19 +160,19 @@ $this->view('templates/navbar', $data);
                     <span class="border"></span>
                 </div>
             </div>
-            <div class="button-box">
+            <!-- <div class="button-box">
                 <div class="splide category" role="group" aria-label="Splide Basic HTML Example">
                     <div class="splide__track">
                         <ul class="splide__list">
-                            <?php foreach ($data['kategori'] as $kategori) : ?>
+                            <?php foreach ($data['sub_kategori'] as $kategori) : ?>
                                 <li class="splide__slide">
-                                    <button class="button-cat"><?= $kategori['nama_kategori'] ?></button>
+                                    <button class="button-cat"><?= $kategori['nama_sub_kategori'] ?></button>
                                 </li>
                             <?php endforeach ?>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="content-box">
                 <?php foreach ($data['kategori'] as $kategori) : ?>
