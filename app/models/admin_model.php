@@ -268,6 +268,7 @@ class admin_model extends Controller
                     nama_gambar4 = :nama_gambar4,
                     nama_gambar5 = :nama_gambar5,
                     id_kategori = :id_kategori,
+                    id_sub_kategori = :id_sub_kategori,
                     harga = :harga,  
                     stock = :stock,
                     sold = :sold
@@ -285,6 +286,7 @@ class admin_model extends Controller
         $this->db->bind('nama_gambar4', $gambar4);
         $this->db->bind('nama_gambar5', $gambar5);
         $this->db->bind('id_kategori', $data['id_kategori']);
+        $this->db->bind('id_sub_kategori', $data['id_sub_kategori']);
         $this->db->bind('harga', $data['harga']);
         $this->db->bind('stock', $data['stock']);
         $this->db->bind('sold', $data['sold']);

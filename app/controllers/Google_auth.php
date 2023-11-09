@@ -1,5 +1,5 @@
 <?php
-require_once '../vendor/autoload.php'; // Memuat pustaka Google API
+require_once 'vendor/autoload.php'; // Memuat pustaka Google API
 
 class Google_auth extends Controller
 {

@@ -134,7 +134,7 @@ if (!$_SESSION["user_session"]) {
                             <div class="stok">
                                 <label for="stok">stok</label>
                                 <span>:</span>
-                                <input name="stock" id="stok" type="text" placeholder="Masukan stok" value="<?= $data['catalog']['stock'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57" >
+                                <input name="stock" id="stok" type="text" placeholder="Masukan stok" value="<?= $data['catalog']['stock'] ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57">
                             </div>
                             <div class="stok">
                                 <label for="stok">tanggal masuk stok</label>
@@ -146,7 +146,7 @@ if (!$_SESSION["user_session"]) {
                                 <span>:</span>
                                 <input name="sold" id="terjual" type="text" placeholder="Masukan terjual" value="<?= $data['catalog']['sold'] ?>" readonly>
                             </div>
-                            <div class="Kategori">
+                            <!-- <div class="Kategori">
                                 <label for="Kategori">Kategori</label>
                                 <span>:</span>
                                 <select name="id_kategori" id="id_kategori" required>
@@ -157,11 +157,32 @@ if (!$_SESSION["user_session"]) {
                                             <?= $key['nama_kategori'] ?></option>
                                     <?php } ?>
                                 </select>
+                            </div> -->
+
+
+                            <div class="Category">
+                                <label for="Category">Nama kategori</label>
+                                <span>:</span>
+                                <select name="id_kategori" id="id_kategori" required>
+                                    <option value="">-- pilih kategori --</option>
+                                    <?php foreach ($data['catalog2'] as $key) { ?>
+                                        <option value="<?= $key['id_kategori'] ?>">
+                                            <?= $key['nama_kategori'] ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
+                            <div class="sub-category">
+                                <label for="sub_kategori">Sub Kategori</label>
+                                <span>:</span>
+                                <select name="id_sub_kategori" id="id_sub_kategori" required>
+                                    <option value="">-- pilih sub kategori --</option>
+                                </select>
+                            </div>
+   
                             <div class="deskripsi ">
                                 <label for="deskripsi">deskripsi</label>
                                 <span>:</span>
-                                <textarea  class="deskrip" name="deskripsi_katalog" cols="30" rows="20"><?= $data['catalog']['deskripsi_katalog'] ?></textarea>
+                                <textarea class="deskrip" name="deskripsi_katalog" cols="30" rows="20"><?= $data['catalog']['deskripsi_katalog'] ?></textarea>
                             </div>
                             <div class="button-box">
                                 <button type="submit" name="submit">Ubah</button>
@@ -174,3 +195,24 @@ if (!$_SESSION["user_session"]) {
         <footer></footer>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_kategori').on('change', function() {
+            var id_kategori = $(this).val();
+            if (id_kategori) {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= BASEURL ?>Admin/getSubKategori', // Tentukan URL yang akan digunakan untuk mengambil sub kategori
+                    data: 'id_kategori=' + id_kategori,
+                    success: function(html) {
+                        $('#id_sub_kategori').html(html);
+                    }
+                });
+            } else {
+                $('#id_sub_kategori').html('<option value="">-- pilih sub kategori --</option>');
+            }
+        });
+    });
+</script>

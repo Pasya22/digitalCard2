@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 08:40 AM
+-- Generation Time: Nov 09, 2023 at 03:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -65,7 +65,7 @@ INSERT INTO `catalog` (`id_katalog`, `tgl_masuk_stock`, `nama_katalog`, `deskrip
 (15, '2023-09-21 11:20:40', 'Javawebster4', '<p>Desain Logo Dan Kartu</p>', '650a8a5d355cd.jpeg', '0', '0', '0', '0', 3, 2, 1000000, 244, 1),
 (16, '2023-09-22 15:27:40', 'Javawebster5', '<p>ASUUUUUUUUUUUUUUUUUUUU</p>', '650a8a8073a1c.jpeg', '0', '0', '0', '0', 2, 2, 1550000, 239, 16),
 (31, '2023-10-25 15:24:00', 'Coba22', 'asdsadasdsad', '6538d0b259942.jpg', '0', '0', '0', '0', 1, 1, 450000, 788, 2),
-(32, '2023-10-27 11:12:00', 'akuh', 'aset', '653b38ce219a0.jpg', '0', '0', '0', '0', 1, 2, 450000, 100, 0);
+(32, '2023-10-27 11:12:00', 'akuh', 'asetasd', '653b38ce219a0.jpg', '0', '0', '0', '0', 1, 1, 450000, 100, 0);
 
 -- --------------------------------------------------------
 
